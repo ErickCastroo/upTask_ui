@@ -1,7 +1,10 @@
 import { Outlet } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 
 import { Logo } from '@/components/Logo'
 import { NavMenu } from '@/components/Menu'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 function Layout() {
   return (
@@ -18,6 +21,10 @@ function Layout() {
       <section className='max-w-screen-2xl mx-auto mt-10 ml-10'>
         <Outlet />
       </section>
+
+      <ToastContainer
+
+      />
     </>
   )
 }
