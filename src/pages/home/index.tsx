@@ -1,9 +1,11 @@
-function Home() {
+
+
+function Home () {
   return (
-    <>
-      <h1>Home</h1>
-    </>
+    <div>
+      <h1>Hola mundo </h1>
+    </div>
   )
 }
 
-export { Home }
+export  { Home } 
