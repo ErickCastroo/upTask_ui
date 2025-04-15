@@ -2,7 +2,7 @@ import { Routes, BrowserRouter, Route } from 'react-router-dom'
 
 import { Home } from '@/pages/home'
 import { Layout } from '@/components/Layout'
-import { ProyectCreate } from '@/pages/Proyect'
+import { ProyectCreate } from '@/pages/Project'
 
 function Routers() {
 
