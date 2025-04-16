@@ -57,14 +57,8 @@ function ProjectForm({ register, errors }: ProjectFormProps) {
           id='description'
           className='w-full p-3 text-purple-400 border border-gray-200'
           placeholder='Descripción del Proyecto'
-          {...register('description', {
-            required: 'Una descripción del proyecto es obligatoria'
-          })}
+          {...register('description')}
         />
-
-        {errors.description && (
-          <ErrorMessage>{errors.description.message}</ErrorMessage>
-        )}
       </div>
     </>
   )

@@ -7,7 +7,7 @@ function NavMenu() {
 
   return (
     <Popover className='relative'>
-      <Popover.Button className='inline-flex items-center gap-x-1 text-sm font-semibold leading-6 p-2 rounded-lg bg-purple-600'>
+      <Popover.Button className='inline-flex items-center gap-x-1 text-sm font-semibold leading-6 p-2 rounded-lg bg-purple-600 cursor-pointer'>
         <Bars3Icon className='w-8 h-8 text-white ' />
       </Popover.Button>
 
@@ -32,7 +32,7 @@ function NavMenu() {
               className='block p-2 hover:text-purple-950 hover:bg-purple-100 rounded-lg'
             >Mis Proyectos</Link>
             <button
-              className='block p-2 mt-2 w-full hover:text-red-600 cursor-pointer hover:bg-red-100 rounded-lg'
+              className='block p-2 mt-2 w-full hover:text-red-600  hover:border hover:border-red-400 cursor-pointer hover:bg-red-100 rounded-lg'
               type='button'
               onClick={() => { }}
             >
