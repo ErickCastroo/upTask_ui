@@ -12,4 +12,4 @@ async function CreateProject(formData: ProjectFormTypes) {
   }
 }
 
-export { CreateProject };
+export { CreateProject }

@@ -2,6 +2,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
+import { useMutation } from '@tanstack/react-query'
+
 import { CreateProject } from '@/api/project'
 import { ProjectFormTypes } from '@/types'
 
@@ -19,16 +21,21 @@ function ProyectCreate() {
 
   const { register, handleSubmit, formState: { errors } } = useForm<ProjectFormTypes>()
 
-  const onSubmit = async (data: ProjectFormTypes) => {
-    const res = await CreateProject(data)
-    if (res) {
+  const mutation = useMutation({
+    mutationFn: CreateProject,
+    onSuccess: () => {
       toast.success('Proyecto creado correctamente')
       navigate('/')
-      return
-    }
-    toast.error('Error al crear el proyecto')
-    navigate('/')
-  }
+    },
+    onError: () => {
+      toast.error('Error al crear el proyecto')
+      navigate('/')
+    },
+  })
+
+  const onSubmit = async (data:  ProjectFormTypes) => mutation.mutate(data)
+
+
   return (
     <div className='max-w-3xl mx-auto'>
       <h1 className='text-5xl font-black'> Crear Proyecto</h1>
