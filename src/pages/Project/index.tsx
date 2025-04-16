@@ -23,17 +23,17 @@ function ProyectCreate() {
 
   const mutation = useMutation({
     mutationFn: CreateProject,
+    onError: (error) => {
+      toast.error(error.message)
+      navigate('/')
+    },
     onSuccess: () => {
       toast.success('Proyecto creado correctamente')
       navigate('/')
     },
-    onError: () => {
-      toast.error('Error al crear el proyecto')
-      navigate('/')
-    },
   })
 
-  const onSubmit = async (data:  ProjectFormTypes) => mutation.mutate(data)
+  const onSubmit = async (data: ProjectFormTypes) => mutation.mutate(data)
 
 
   return (
