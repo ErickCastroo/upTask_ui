@@ -6,20 +6,14 @@ import { useMutation } from '@tanstack/react-query'
 
 import { CreateProject } from '@/api/project'
 import { ProjectFormTypes } from '@/types'
+import { initialValues } from '@/libs/initialValues'
 
-import { ProjectForm } from '@/components/Form'
+import { ProjectForm } from '@/components/Forms/FormCreate'
 
-function ProyectCreate() {
+function ProjectCreate() {
   const navigate = useNavigate()
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const initialValues: ProjectFormTypes = {
-    projectName: '',
-    clientName: '',
-    description: '',
-  }
-
-  const { register, handleSubmit, formState: { errors } } = useForm<ProjectFormTypes>()
+  const { register, handleSubmit, formState: { errors } } = useForm({defaultValues: initialValues})
 
   const mutation = useMutation({
     mutationFn: CreateProject,
@@ -61,4 +55,4 @@ function ProyectCreate() {
   )
 }
 
-export { ProyectCreate }
+export { ProjectCreate }
