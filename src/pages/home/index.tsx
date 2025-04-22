@@ -19,7 +19,7 @@ function Home() {
   if (isLoading) return <IsLoading />
 
   return (
-    <>
+    <div className=''>
       <h1 className='text-5xl font-black'> Mis proyectos</h1>
       <p className='text-xl font-light text-gray-500 mt-5'>Administra tus proyectos</p>
       <Link
@@ -40,8 +40,8 @@ function Home() {
         </footer>
 
       ) : (
-        <div className='max-h-[50vh] overflow-y-auto'>
-          <ul role='list' className='space-y-6 mt-10'>
+        <div className=' max-h-[50vh] overflow-y-auto'>
+          <ul role='list' className=' space-y-6 mt-10'>
             {data?.map((project) => (
               <li
                 key={project._id}
@@ -55,7 +55,7 @@ function Home() {
                     >
                       {project.projectName}
                     </Link>
-                    <p className='text-sm text-purple-500 font-bold'>
+                    <p className='text-sm text-purple-500 font-extrabold'>
                       Cliente: {project.clientName}
                     </p>
                     <p className='text-sm text-purple-600 font-black'>
@@ -71,18 +71,18 @@ function Home() {
                     </MenuButton>
                     <Transition
                       as={Fragment}
-                      enter='transition ease-out duration-100'
+                      enter='transition ease-out duration-100 '
                       enterFrom='transform opacity-0 scale-95'
                       enterTo='transform opacity-100 scale-100'
                       leave='transition ease-in duration-75'
                       leaveFrom='transform opacity-100 scale-100'
                       leaveTo='transform opacity-0 scale-95'
                     >
-                      <MenuItems className='absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1'>
+                      <MenuItems className='absolute right-0 z-10 mt-2 w-56 shrink rounded-xl bg-white p-4 text-sm font-semibold leading-6 text-gray-900 shadow-lg ring-1 ring-gray-900/5'>
                         <MenuItem>
                           <Link
                             to={``}
-                            className='px-3 py-1 text-sm leading-6 block  hover:text-purple-950 hover:bg-purple-100'
+                            className='block p-2 mt-2 hover:text-purple-950 hover:bg-purple-100 rounded-lg'
                           >
                             Ver Proyecto
                           </Link>
@@ -90,7 +90,7 @@ function Home() {
                         <MenuItem>
                           <Link
                             to={`/project/${project._id}/edit`}
-                            className='block px-3 py-1 text-sm leading-6 text-gray-900 hover:text-purple-950 hover:bg-purple-100'
+                            className='block p-2 mt-2 hover:text-purple-950 hover:bg-purple-100 rounded-lg'
                           >
                             Editar Proyecto
                           </Link>
@@ -98,7 +98,7 @@ function Home() {
                         <MenuItem>
                           <button
                             type='button'
-                            className='block px-3 py-1 mt-2 text-sm w-full hover:text-red-600 hover:border-red-400 cursor-pointer hover:bg-red-100'
+                            className='block p-2 mt-2 w-full hover:text-red-600  hover:border hover:border-red-400 cursor-pointer hover:bg-red-100 rounded-lg'
                             onClick={() => { }}
                           >
                             Eliminar Proyecto
@@ -113,7 +113,7 @@ function Home() {
           </ul>
         </div>
       )}
-    </>
+    </div>
   )
 }
 export { Home } 
