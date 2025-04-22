@@ -24,7 +24,7 @@ function Home() {
       <p className='text-xl font-light text-gray-500 mt-5'>Administra tus proyectos</p>
       <Link
         to='/project/new'
-        className='bg-purple-600 text-white px-4 py-2 rounded-lg mt-5 inline-block hover:bg-purple-700 transition-colors font-semibold'
+        className='bg-purple-600 text-white px-4 py-2 rounded-lg mt-5 mb-5 inline-block hover:bg-purple-700 transition-colors font-semibold'
       >
         Crear Proyecto
       </Link>
@@ -51,23 +51,23 @@ function Home() {
                   <div className='min-w-0 flex-auto space-y-2'>
                     <Link
                       to={``}
-                      className='text-gray-600 cursor-pointer hover:underline text-3xl font-bold'
+                      className='text-gray-400 hover:text-purple-500 cursor-pointer hover:underline text-3xl font-bold'
                     >
                       {project.projectName}
                     </Link>
-                    <p className='text-sm text-gray-400'>
+                    <p className='text-sm text-purple-500 font-bold'>
                       Cliente: {project.clientName}
                     </p>
-                    <p className='text-sm text-gray-400'>
+                    <p className='text-sm text-purple-600 font-black'>
                       {project.description}
                     </p>
                   </div>
                 </div>
                 <div className='flex shrink-0 items-center gap-x-6'>
                   <Menu as='div' className='relative flex-none '>
-                    <MenuButton className='-m-2.5 block p-2.5 text-gray-500 hover:text-gray-900'>
+                    <MenuButton className='-m-2.5 block p-2.5 text-gray-500 hover:text-purple-800'>
                       <span className='sr-only'>opciones</span>
-                      <EllipsisVerticalIcon className='h-9 w-9' aria-hidden='true' />
+                      <EllipsisVerticalIcon className='h-9 w-9 hover:text-purple-800' aria-hidden='true' />
                     </MenuButton>
                     <Transition
                       as={Fragment}
@@ -89,7 +89,7 @@ function Home() {
                         </MenuItem>
                         <MenuItem>
                           <Link
-                            to={``}
+                            to={`/project/${project._id}/edit`}
                             className='block px-3 py-1 text-sm leading-6 text-gray-900 hover:text-purple-950 hover:bg-purple-100'
                           >
                             Editar Proyecto
@@ -112,7 +112,6 @@ function Home() {
             ))}
           </ul>
         </div>
-
       )}
     </>
   )
