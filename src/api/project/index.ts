@@ -28,7 +28,6 @@ export async function GetProject() {
     if (!response.success) {
       throw new Error('Error en la validación de datos')
     }
-    console.log(response.data)
     return response.data
   } catch (error) {
     if (isAxiosError(error)) {

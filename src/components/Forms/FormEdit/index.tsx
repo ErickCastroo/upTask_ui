@@ -35,7 +35,7 @@ function FormEdit({ data }: ProjectFormProps) {
         </label>
         <input
           id='projectName'
-          className='w-full p-3 text-purple-400 border border-gray-200'
+          className='w-full p-3 text-purple-500 font-bold border border-gray-200'
           type='text'
           placeholder='Nombre del Proyecto'
           {...register('projectName', {
@@ -54,7 +54,7 @@ function FormEdit({ data }: ProjectFormProps) {
         </label>
         <input
           id='clientName'
-          className='w-full p-3 text-purple-400 border border-gray-200'
+          className='w-full p-3 text-purple-500 font-bold border border-gray-200'
           type='text'
           placeholder='Nombre del Cliente'
           {...register('clientName', {
@@ -73,8 +73,7 @@ function FormEdit({ data }: ProjectFormProps) {
         </label>
         <textarea
           id='description'
-          defaultValue={data.description}
-          className='w-full p-3 text-purple-400 border border-gray-200'
+          className='w-full p-3 text-purple-500 font-bold border border-gray-200'
           placeholder='Descripción del Proyecto'
           {...register('description')}
         />

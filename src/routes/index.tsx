@@ -2,7 +2,8 @@ import { Routes, BrowserRouter, Route } from 'react-router-dom'
 
 import { Home } from '@/pages/home'
 import { Layout } from '@/components/Layout'
-import { ProyectCreate } from '@/pages/Project'
+import { ProjectCreate } from '@/pages/Project'
+import { ProjectEdit } from '@/pages/Project/projectEdit'
 
 function Routers() {
 
@@ -11,7 +12,9 @@ function Routers() {
       <Routes>
         <Route element={<Layout />}>
           <Route path='/' element={<Home />} index />
-          <Route path='/project/new' element={<ProyectCreate />} />
+          <Route path='/project/new' element={<ProjectCreate />} />
+          <Route path='/project/:projectId/edit' element={<ProjectEdit />} />
+          <Route path='*' element={<h1>404 Not Found</h1>} />
         </Route>
       </Routes>
     </BrowserRouter>
