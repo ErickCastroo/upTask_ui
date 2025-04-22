@@ -12,7 +12,7 @@ function ProjectEdit() {
   const params = useParams()
   const projectId = params.projectId!
 
-  const { data, isError } = useQuery({
+  const { data, isError, isLoading } = useQuery({
     queryKey: ['editProject', projectId],
     queryFn: () => GetProjectById(projectId),
     retry: false,
@@ -46,7 +46,7 @@ function ProjectEdit() {
         onSubmit={handleSubmit(onSubmit)}
       >
         {data && (
-          <FormEdit data={data} register={register} errors={errors} />
+          <FormEdit data={data} isLoading={isLoading} register={register} errors={errors} />
         )}
         <input
           type='submit'

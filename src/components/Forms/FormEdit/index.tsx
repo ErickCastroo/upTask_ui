@@ -1,15 +1,18 @@
-import { ErrorMessage } from '@/components/ErrorMessage'
-import { ProjectFormTypes } from '@/types'
 import { useEffect } from 'react'
 import { UseFormRegister, FieldErrors, useForm } from 'react-hook-form'
 
+import { ProjectFormTypes } from '@/types'
+import { IsLoadingForm } from '@/components/IsLoadingForms'
+
+import { ErrorMessage } from '@/components/ErrorMessage'
 type ProjectFormProps = {
   data: ProjectFormTypes
   register: UseFormRegister<ProjectFormTypes>
   errors: FieldErrors<ProjectFormTypes>
+  isLoading: boolean
 }
 
-function FormEdit({ data }: ProjectFormProps) {
+function FormEdit({ data, isLoading }: ProjectFormProps) {
 
   const initialValues: ProjectFormTypes = {
     projectName: data.projectName || '',
@@ -26,6 +29,10 @@ function FormEdit({ data }: ProjectFormProps) {
       reset(data)
     }
   }, [data, reset])
+
+  if (isLoading) {
+    return <IsLoadingForm />
+  }
 
   return (
     <>
