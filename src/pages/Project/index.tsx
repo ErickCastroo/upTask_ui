@@ -5,8 +5,9 @@ import { toast } from 'react-toastify'
 import { useMutation } from '@tanstack/react-query'
 
 import { CreateProject } from '@/api/project'
-import { ProjectFormTypes } from '@/types'
 import { initialValues } from '@/libs/initialValues'
+
+import { ProjectFormTypes } from '@/types'
 
 import { ProjectForm } from '@/components/Forms/FormCreate'
 
@@ -29,10 +30,9 @@ function ProjectCreate() {
 
   const onSubmit = async (data: ProjectFormTypes) => mutation.mutate(data)
 
-
   return (
     <div className='max-w-3xl mx-auto'>
-      <h1 className='text-5xl font-black'> Crear Proyecto</h1>
+      <h1 className='text-5xl font-black'>Crear Proyecto</h1>
       <Link
         to='/'
         className='bg-purple-600 text-white px-4 py-2 rounded-lg mt-5 inline-block hover:bg-purple-700 transition-colors font-semibold'

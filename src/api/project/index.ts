@@ -1,9 +1,7 @@
 import { Api } from '@/libs/axios'
-import { ProjectFormTypes } from '@/types'
 import { isAxiosError } from 'axios'
 
-import { homeProjectSchema, Project } from '@/types'
-
+import { ProjectFormTypes,  homeProjectSchema, Project } from '@/types'
 
 export async function CreateProject(formData: ProjectFormTypes) {
   try {
@@ -38,7 +36,6 @@ export async function GetProject() {
       }
     }
     throw new Error('Ocurrió un error inesperado.')
-
   }
 }
 
@@ -55,10 +52,8 @@ export async function GetProjectById(id: Project['_id']) {
       }
     }
     throw new Error('Ocurrió un error inesperado.')
-
   }
 }
-
 
 type UpdateProjectByIdProps = {
   formData: ProjectFormTypes
@@ -94,6 +89,5 @@ export async function DeleteProjectById(id: Project['_id']) {
       }
     }
     throw new Error('Ocurrió un error inesperado.')
-
   }
 }
