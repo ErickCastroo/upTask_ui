@@ -1,13 +1,14 @@
-import { Link } from 'react-router-dom'
-
-import { useQuery } from '@tanstack/react-query'
-
-import { GetProject } from '@/api/project'
-
 import { Fragment } from 'react'
+import { Link } from 'react-router-dom'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+
+import { DeleteProjectById, GetProject } from '@/api/project'
+
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
+
 import { IsLoading } from '@/components/isLoading'
+import { toast } from 'react-toastify'
 
 function Home() {
 
@@ -15,6 +16,20 @@ function Home() {
     queryKey: ['projects'],
     queryFn: GetProject
   })
+
+  const queryClient = useQueryClient()
+  const { mutate } = useMutation({
+    mutationFn: DeleteProjectById,
+    onSuccess: () => {
+      toast.success('Proyecto eliminado correctamente')
+      console.log('Proyecto eliminado correctamente')
+      queryClient.invalidateQueries({ queryKey: ['projects'] })
+    },
+    onError: () => {
+      toast.error(`Error al eliminar el proyecto`)
+    }
+  })
+
 
   if (isLoading) return <IsLoading />
 
@@ -99,7 +114,7 @@ function Home() {
                           <button
                             type='button'
                             className='block p-2 mt-2 w-full hover:text-red-600  hover:border hover:border-red-400 cursor-pointer hover:bg-red-100 rounded-lg'
-                            onClick={() => { }}
+                            onClick={() => { mutate(project._id) }}
                           >
                             Eliminar Proyecto
                           </button>
