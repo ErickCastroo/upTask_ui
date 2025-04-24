@@ -65,7 +65,7 @@ function Home() {
                 <div className='flex min-w-0 gap-x-4'>
                   <div className='min-w-0 flex-auto space-y-2'>
                     <Link
-                      to={``}
+                      to={`/project/${project._id}`}
                       className='text-gray-400 hover:text-purple-500 cursor-pointer hover:underline text-3xl font-bold'
                     >
                       {project.projectName}
@@ -82,7 +82,7 @@ function Home() {
                   <Menu as='div' className='relative flex-none '>
                     <MenuButton className='-m-2.5 block p-2.5 text-gray-500 hover:text-purple-800'>
                       <span className='sr-only'>opciones</span>
-                      <EllipsisVerticalIcon className='h-9 w-9 hover:text-purple-800' aria-hidden='true' />
+                      <EllipsisVerticalIcon className='h-9 w-9 hover:text-purple-800' aria-hidden='true'/>
                     </MenuButton>
                     <Transition
                       as={Fragment}
@@ -96,7 +96,7 @@ function Home() {
                       <MenuItems className='absolute right-0 z-10 mt-2 w-56 shrink rounded-xl bg-white p-4 text-sm font-semibold leading-6 text-gray-900 shadow-lg ring-1 ring-gray-900/5'>
                         <MenuItem>
                           <Link
-                            to={``}
+                            to={`/project/${project._id}`}
                             className='block p-2 mt-2 hover:text-purple-950 hover:bg-purple-100 rounded-lg'
                           >
                             Ver Proyecto
