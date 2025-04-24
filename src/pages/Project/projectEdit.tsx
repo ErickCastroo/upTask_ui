@@ -18,7 +18,7 @@ function ProjectEdit() {
     retry: false,
   })
 
-  const { register, handleSubmit, formState: { errors } } = useForm<ProjectFormTypes>()
+  const { register,  formState: { errors } } = useForm<ProjectFormTypes>()
 
   useEffect(() => {
     if (isError) {
@@ -26,10 +26,6 @@ function ProjectEdit() {
       navigate('/')
     }
   }, [isError, navigate])
-
-  const onSubmit = async (formData: ProjectFormTypes) => {
-    console.log('Datos del formulario:', formData)
-  }
 
   return (
     <div className='max-w-3xl mx-auto'>
@@ -43,19 +39,13 @@ function ProjectEdit() {
       <form
         className='mt-5 bg-white shadow-lg rounded-lg p-10'
         noValidate
-        onSubmit={handleSubmit(onSubmit)}
       >
         {data && (
-          <FormEdit data={data} isLoading={isLoading} register={register} errors={errors} />
+          <FormEdit data={data} projectId={projectId} isLoading={isLoading} register={register} errors={errors} />
         )}
-        <input
-          type='submit'
-          className='bg-indigo-600 text-white px-4 py-2 rounded-lg mt-5 inline-block hover:bg-indigo-700 transition-colors font-semibold cursor-pointer'
-          value='Editar'
-        />
       </form>
     </div>
-  )
+  ) 
 }
 
 export { ProjectEdit }

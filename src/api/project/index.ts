@@ -46,7 +46,29 @@ export async function GetProjectById(id: Project['_id']) {
   try {
     const { data } = await Api(`/projects/${id}`)
     return data
-  } catch (error) {  
+  } catch (error) {
+    if (isAxiosError(error)) {
+      if (error.response) {
+        throw new Error(error.response.data.message)
+      } else {
+        throw new Error('No se pudo conectar al servidor. Verifica tu conexión.')
+      }
+    }
+    throw new Error('Ocurrió un error inesperado.')
+
+  }
+}
+
+
+type UpdateProjectByIdProps = {
+  formData: ProjectFormTypes
+  projectId: Project['_id']
+}
+export async function UpdateProjectById({ formData, projectId }: UpdateProjectByIdProps) {
+  try {
+    const { data } = await Api.put(`/projects/${projectId}`, formData)
+    return data
+  } catch (error) {
     if (isAxiosError(error)) {
       if (error.response) {
         throw new Error(error.response.data.message)

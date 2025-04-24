@@ -1,18 +1,25 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useEffect } from 'react'
 import { UseFormRegister, FieldErrors, useForm } from 'react-hook-form'
+import { useMutation } from '@tanstack/react-query'
 
 import { ProjectFormTypes } from '@/types'
 import { IsLoadingForm } from '@/components/IsLoadingForms'
 
 import { ErrorMessage } from '@/components/ErrorMessage'
+import { UpdateProjectById } from '@/api/project'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
+
 type ProjectFormProps = {
   data: ProjectFormTypes
+  projectId: string
   register: UseFormRegister<ProjectFormTypes>
   errors: FieldErrors<ProjectFormTypes>
   isLoading: boolean
 }
 
-function FormEdit({ data, isLoading }: ProjectFormProps) {
+function FormEdit({ data, projectId, isLoading }: ProjectFormProps) {
 
   const initialValues: ProjectFormTypes = {
     projectName: data.projectName || '',
@@ -20,8 +27,9 @@ function FormEdit({ data, isLoading }: ProjectFormProps) {
     description: data.description || '',
   }
 
+  const navigate = useNavigate()
 
-  const { register, reset, formState: { errors } } = useForm<ProjectFormTypes>({
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<ProjectFormTypes>({
     defaultValues: initialValues,
   })
   useEffect(() => {
@@ -33,6 +41,29 @@ function FormEdit({ data, isLoading }: ProjectFormProps) {
   if (isLoading) {
     return <IsLoadingForm />
   }
+
+  const { mutate } = useMutation({
+    mutationFn: UpdateProjectById,
+    onSuccess: () => {
+      navigate('/')
+      toast.success('Proyecto actualizado correctamente')
+    },
+    onError: (error) => {
+      navigate('/')
+      toast.error(`Error al actualizar el proyecto: ${error.message}`)
+    }
+  })
+
+
+  const onClick = async (formData: ProjectFormTypes) => {
+    const data = {
+      formData,
+      projectId,
+    }
+    mutate(data)
+    reset(initialValues)
+  }
+
 
   return (
     <>
@@ -85,6 +116,12 @@ function FormEdit({ data, isLoading }: ProjectFormProps) {
           {...register('description')}
         />
       </div>
+      <input
+          type='submit'
+          className='bg-indigo-600 text-white px-4 py-2 rounded-lg mt-5 inline-block hover:bg-indigo-700 transition-colors font-semibold cursor-pointer'
+          value='Editar'
+          onClick={handleSubmit(onClick)}
+        />
     </>
   )
 }
