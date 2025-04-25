@@ -21,7 +21,6 @@ type ProjectFormProps = {
 }
 
 function FormEdit({ data, projectId, isLoading }: ProjectFormProps) {
-
   const initialValues: ProjectFormTypes = {
     projectName: data.projectName || '',
     clientName: data.clientName || '',
@@ -55,7 +54,6 @@ function FormEdit({ data, projectId, isLoading }: ProjectFormProps) {
     }
   })
 
-
   const onClick = async (formData: ProjectFormTypes) => {
     const data = {
       formData,
@@ -64,7 +62,6 @@ function FormEdit({ data, projectId, isLoading }: ProjectFormProps) {
     mutate(data)
     reset(initialValues)
   }
-
 
   return (
     <>

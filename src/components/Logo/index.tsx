@@ -1,7 +1,6 @@
-
 function Logo() {
   return (
-    <img src='./logo.svg' alt='' />
+    <img src='./logo.svg' alt='Uptask' />
   )
 }
 

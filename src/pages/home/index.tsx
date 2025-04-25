@@ -1,4 +1,5 @@
 import { Fragment } from 'react'
+import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
@@ -8,7 +9,6 @@ import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/r
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 
 import { IsLoading } from '@/components/isLoading'
-import { toast } from 'react-toastify'
 
 function Home() {
 
@@ -35,7 +35,7 @@ function Home() {
 
   return (
     <div className='container mx-auto mt-10'>
-      <h1 className='text-5xl font-black'> Mis proyectos</h1>
+      <h1 className='text-5xl font-black'>Mis proyectos</h1>
       <p className='text-xl text-purple-500 font-black mt-5'>Administra tus proyectos</p>
       <Link
         to='/project/new'

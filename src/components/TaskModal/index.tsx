@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-export default function AddTaskModal() {
+function AddTaskModal() {
   const navigate = useNavigate()
   const location = useLocation()
   const queryParams = new URLSearchParams(location.search)
@@ -12,7 +12,7 @@ export default function AddTaskModal() {
   return (
     <>
       <Transition appear show={Show} as={Fragment}>
-        <Dialog as='div' className='relative z-10' onClose={() => navigate(location.pathname, {replace: true})}>
+        <Dialog as='div' className='relative z-10' onClose={() => navigate(location.pathname, { replace: true })}>
           <Transition.Child
             as={Fragment}
             enter='ease-out duration-300'
@@ -39,7 +39,7 @@ export default function AddTaskModal() {
                 <Dialog.Panel className='w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-16'>
                   <Dialog.Title
                     as='h3'
-                    className='font-black text-4xl  my-5'
+                    className='font-black text-4xl my-5'
                   >
                     Nueva Tarea
                   </Dialog.Title>
@@ -56,3 +56,5 @@ export default function AddTaskModal() {
     </>
   )
 }
+
+export { AddTaskModal }
