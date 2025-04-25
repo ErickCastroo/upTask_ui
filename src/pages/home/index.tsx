@@ -22,7 +22,7 @@ function Home() {
     mutationFn: DeleteProjectById,
     onSuccess: () => {
       toast.success('Proyecto eliminado correctamente')
-      console.log('Proyecto eliminado correctamente')
+      console.info('Proyecto eliminado correctamente')
       queryClient.invalidateQueries({ queryKey: ['projects'] })
     },
     onError: () => {
@@ -34,7 +34,7 @@ function Home() {
   if (isLoading) return <IsLoading />
 
   return (
-    <div className=''>
+    <div className='container mx-auto mt-10'>
       <h1 className='text-5xl font-black'> Mis proyectos</h1>
       <p className='text-xl text-purple-500 font-black mt-5'>Administra tus proyectos</p>
       <Link
@@ -53,7 +53,6 @@ function Home() {
             </Link>
           </p>
         </footer>
-
       ) : (
         <div className=' max-h-[50vh] overflow-y-auto'>
           <ul role='list' className=' space-y-6 mt-10'>

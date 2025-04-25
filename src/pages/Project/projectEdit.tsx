@@ -37,7 +37,7 @@ function ProjectEdit() {
         Volver
       </Link>
       <form
-        className='mt-5 bg-white shadow-lg rounded-lg p-10'
+        className='mt-5 bg-white shadow-lg rounded-xl p-10'
         noValidate
       >
         {data && (
