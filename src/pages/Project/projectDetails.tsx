@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 import { useQuery } from '@tanstack/react-query'
 import { GetProjectById } from '@/api/project'
 import { IsLoading } from '@/components/isLoading'
+import AddTaskModal from '@/components/TaskModal'
 
 function ProjectDetails() {
   const params = useParams()
@@ -33,8 +34,10 @@ function ProjectDetails() {
           onClick={() => usenavigate(`?newTask=true`)}
         >
           Agregar Tarea
-        </button> 
+        </button>
       </nav>
+
+      <AddTaskModal />
     </>
   )
 }

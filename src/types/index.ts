@@ -21,3 +21,19 @@ export const homeProjectSchema = z.array(
 
 export type Project = z.infer<typeof ProjectSchema>
 export type ProjectFormTypes = Pick<Project, 'projectName' | 'clientName' | 'description'> 
+
+
+//Tasks
+
+export const TaskStatusSchema = z.enum(['pending', 'onHold', 'inProgress', 'underReview', 'completed'])
+
+export const TaskSchema = z.object({
+  _id: z.string(),
+  taskName: z.string(),
+  description: z.string(),
+  projectId: z.string(),
+  status: TaskStatusSchema,
+})
+
+export type Task = z.infer<typeof TaskSchema>
+export type TaskFormTypes = Pick<Task, 'taskName' | 'description' | 'projectId' | 'status'>
