@@ -1,8 +1,6 @@
 import { z } from 'zod'
 
-
 //** Proyectos */
-
 export const ProjectSchema = z.object({
   _id: z.string(),
   projectName: z.string(),
@@ -24,9 +22,7 @@ export type ProjectFormTypes = Pick<Project, 'projectName' | 'clientName' | 'des
 
 
 //Tasks
-
 export const TaskStatusSchema = z.enum(['pending', 'onHold', 'inProgress', 'underReview', 'completed'])
-
 export const TaskSchema = z.object({
   _id: z.string(),
   taskName: z.string(),
