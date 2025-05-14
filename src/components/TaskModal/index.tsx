@@ -26,13 +26,14 @@ function AddTaskModal() {
     description: ''
   }
 
-  const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: initialValues, })
+  const { register, handleSubmit,reset,  formState: { errors } } = useForm({ defaultValues: initialValues, })
 
   const { mutate } = useMutation({
     mutationFn: CreateTask,
     onSuccess: () => {
       toast.success('Tarea creada correctamente')
-      navigate('/')
+      reset()
+      navigate(location.pathname, { replace: true })
     },
     onError: (error: Error) => {
       toast.error(error.message)
