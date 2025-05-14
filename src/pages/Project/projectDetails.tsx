@@ -38,6 +38,7 @@ function ProjectDetails() {
         </button>
       </nav>
 
+
       <AddTaskModal />
     </>
   )

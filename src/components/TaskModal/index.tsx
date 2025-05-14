@@ -1,6 +1,10 @@
 import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+
+import { TaskFormTypes } from '@/types'
+import TaskForm from '../TaskForms/AddForm'
 
 function AddTaskModal() {
   const navigate = useNavigate()
@@ -8,6 +12,19 @@ function AddTaskModal() {
   const queryParams = new URLSearchParams(location.search)
   const newTask = queryParams.get('newTask')
   const Show = newTask ? true : false
+
+
+  const initialValues : TaskFormTypes = {
+    taskName: '',
+    description: ''
+  }
+
+  const { register, handleSubmit, formState: {errors} } = useForm({defaultValues: initialValues,})
+
+  const onSubmit = (data: TaskFormTypes) => {
+    console.log(data)
+  }
+
 
   return (
     <>
@@ -47,6 +64,24 @@ function AddTaskModal() {
                   <p className='text-xl font-bold'>Llena el formulario y crea  {''}
                     <span className='text-fuchsia-600'>una tarea</span>
                   </p>
+
+                  <form
+                    className='mt-10 flex flex-col gap-5'
+                    onSubmit={handleSubmit(onSubmit)}
+                    noValidate
+                  >
+                    <TaskForm
+                      register={register}
+                      errors={errors}
+                    />
+                    <input
+                      type='submit'
+                      className='bg-indigo-600 text-white px-4 py-2 rounded-lg mt-5 inline-block hover:bg-indigo-700 transition-colors font-semibold cursor-pointer'
+                      value='Guardar Tarea'
+                    />
+
+                  </form>
+
                 </Dialog.Panel>
               </Transition.Child>
             </div>
