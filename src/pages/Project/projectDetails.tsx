@@ -28,7 +28,6 @@ function ProjectDetails() {
     <>
       <h1 className='text-5xl font-black'>{data.projectName}</h1>
       <p className='text-xl font-light text-purple-500 mt-5'>{data.description}</p>
-
       <nav className='my-5 flex gap-2'>
         <button
           className='bg-indigo-600 text-white px-10 py-3 rounded-lg inline-block hover:bg-indigo-800 transition-colors font-semibold'
@@ -37,7 +36,6 @@ function ProjectDetails() {
           Agregar Tarea
         </button>
       </nav>
-
 
       <AddTaskModal />
     </>

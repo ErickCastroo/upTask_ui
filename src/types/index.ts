@@ -25,11 +25,11 @@ export type ProjectFormTypes = Pick<Project, 'projectName' | 'clientName' | 'des
 export const TaskStatusSchema = z.enum(['pending', 'onHold', 'inProgress', 'underReview', 'completed'])
 export const TaskSchema = z.object({
   _id: z.string(),
-  taskName: z.string(),
+  name: z.string(),
   description: z.string(),
   projectId: z.string(),
   status: TaskStatusSchema,
 })
 
 export type Task = z.infer<typeof TaskSchema>
-export type TaskFormTypes = Pick<Task, 'taskName' | 'description'>
+export type TaskFormTypes = Pick<Task, 'name' | 'description'>

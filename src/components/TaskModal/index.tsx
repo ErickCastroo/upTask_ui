@@ -1,10 +1,15 @@
 import { Fragment } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { useForm } from 'react-hook-form'
+import { Dialog, Transition } from '@headlessui/react'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
+
+import { useMutation } from '@tanstack/react-query'
+import { CreateTask } from '@/api/tasks'
 
 import { TaskFormTypes } from '@/types'
-import TaskForm from '../TaskForms/AddForm'
+
+import TaskForm from '@/components/TaskForms/AddForm'
 
 function AddTaskModal() {
   const navigate = useNavigate()
@@ -13,18 +18,38 @@ function AddTaskModal() {
   const newTask = queryParams.get('newTask')
   const Show = newTask ? true : false
 
+  const params = useParams()
+  const projectId = params.projectId!
 
-  const initialValues : TaskFormTypes = {
-    taskName: '',
+  const initialValues: TaskFormTypes = {
+    name: '',
     description: ''
   }
 
-  const { register, handleSubmit, formState: {errors} } = useForm({defaultValues: initialValues,})
+  const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: initialValues, })
 
-  const onSubmit = (data: TaskFormTypes) => {
-    console.log(data)
+  const { mutate } = useMutation({
+    mutationFn: CreateTask,
+    onSuccess: () => {
+      toast.success('Tarea creada correctamente')
+      navigate('/')
+    },
+    onError: (error: Error) => {
+      toast.error(error.message)
+      console.error('Detalles del error:', {
+        message: error.message,
+        stack: error.stack
+      })
+    }
+  })
+  
+  const onSubmit = async (formData: TaskFormTypes) => {
+    const data = {
+      formData,
+      projectId
+    }
+    mutate(data)
   }
-
 
   return (
     <>
@@ -79,9 +104,7 @@ function AddTaskModal() {
                       className='bg-indigo-600 text-white px-4 py-2 rounded-lg mt-5 inline-block hover:bg-indigo-700 transition-colors font-semibold cursor-pointer'
                       value='Guardar Tarea'
                     />
-
                   </form>
-
                 </Dialog.Panel>
               </Transition.Child>
             </div>
