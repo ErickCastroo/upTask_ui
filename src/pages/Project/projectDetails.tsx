@@ -6,6 +6,7 @@ import { GetProjectById } from '@/api/project'
 
 import { IsLoading } from '@/components/isLoading'
 import { AddTaskModal } from '@/components/TaskModal'
+import { TaskList } from '@/components/TaskList'
 
 function ProjectDetails() {
   const params = useParams()
@@ -36,7 +37,7 @@ function ProjectDetails() {
           Agregar Tarea
         </button>
       </nav>
-
+      <TaskList tasks={data.tareas}/>
       <AddTaskModal />
     </>
   )
