@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { Dialog, Transition } from '@headlessui/react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { CreateTask } from '@/api/tasks'
 
 import { TaskFormTypes } from '@/types'
@@ -26,11 +26,14 @@ function AddTaskModal() {
     description: ''
   }
 
-  const { register, handleSubmit,reset,  formState: { errors } } = useForm({ defaultValues: initialValues, })
+  const { register, handleSubmit, reset, formState: { errors } } = useForm({ defaultValues: initialValues, })
+
+  const client = useQueryClient()
 
   const { mutate } = useMutation({
     mutationFn: CreateTask,
     onSuccess: () => {
+      client.invalidateQueries({ queryKey: ['ProjectDetails', projectId] })
       toast.success('Tarea creada correctamente')
       reset()
       navigate(location.pathname, { replace: true })
@@ -43,7 +46,7 @@ function AddTaskModal() {
       })
     }
   })
-  
+
   const onSubmit = async (formData: TaskFormTypes) => {
     const data = {
       formData,

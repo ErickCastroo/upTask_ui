@@ -7,6 +7,7 @@ import { GetProjectById } from '@/api/project'
 import { IsLoading } from '@/components/isLoading'
 import { AddTaskModal } from '@/components/TaskModal'
 import { TaskList } from '@/components/TaskList'
+import { EditData } from '@/components/EditTaskModal/EditData'
 
 function ProjectDetails() {
   const params = useParams()
@@ -39,6 +40,9 @@ function ProjectDetails() {
       </nav>
       <TaskList tasks={data.tareas}/>
       <AddTaskModal />
+
+      <EditData /> 
+      {/* <TaskCard task={data.tareas[0]} /> */}  
     </>
   )
 }
