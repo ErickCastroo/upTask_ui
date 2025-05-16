@@ -23,7 +23,8 @@ function AddTaskModal() {
 
   const initialValues: TaskFormTypes = {
     name: '',
-    description: ''
+    description: '',
+    status: 'pending'
   }
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm({ defaultValues: initialValues, })

@@ -20,7 +20,7 @@ function EditData() {
     enabled: !!taskId,
   })
 
-  if (data) return <EditTaskModal data={data} />
+  if (data) return <EditTaskModal data={data} taskId={taskId} />
 }
 
 export { EditData }

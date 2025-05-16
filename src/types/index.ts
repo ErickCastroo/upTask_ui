@@ -32,4 +32,4 @@ export const TaskSchema = z.object({
 })
 
 export type Task = z.infer<typeof TaskSchema>
-export type TaskFormTypes = Pick<Task, 'name' | 'description'>
+export type TaskFormTypes = Pick<Task, 'name' | 'description' | 'status'>

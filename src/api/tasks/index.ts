@@ -50,3 +50,42 @@ export async function GetTaskById({ taskId, projectId }: Pick<TasksApi, 'project
     }
   }
 }
+
+export async function EditTask({ projectId, taskId, formData }: Pick<TasksApi, 'projectId' | 'taskId' | 'formData'>) {
+  try {
+    const url = `/projects/${projectId}/tareas/${taskId}`
+    const { data } = await Api.put<string>(url, formData)
+    return data
+
+  } catch (error) {
+    if (isAxiosError(error)) {
+      if (error.response) {
+        const serverMessage = error.response.data?.message ||
+          error.response.data?.error ||
+          JSON.stringify(error.response.data)
+        throw new Error(`Error del servidor (${error.response.status}): ${serverMessage}`)
+      }
+      throw new Error('Error de conexión con el servidor')
+    }
+  }
+}
+
+export async function DeleteTaskById({ taskId, projectId }: Pick<TasksApi, 'projectId' | 'taskId'>) {
+  try {
+    const url = `/projects/${projectId}/tareas/${taskId}`
+    const { data } = await Api.delete<string>(url)
+    return data
+
+
+  } catch (error) {
+    if (isAxiosError(error)) {
+      if (error.response) {
+        const serverMessage = error.response.data?.message ||
+          error.response.data?.error ||
+          JSON.stringify(error.response.data)
+        throw new Error(`Error del servidor (${error.response.status}): ${serverMessage}`)
+      }
+      throw new Error('Error de conexión con el servidor')
+    }
+  }
+}

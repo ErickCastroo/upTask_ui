@@ -1,10 +1,15 @@
 import { Fragment } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Menu, Transition } from '@headlessui/react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
+
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+
+import { DeleteTaskById } from '@/api/tasks'
 
 import { Task } from '@/types'
+import { toast } from 'react-toastify'
 
-import { Menu, Transition } from '@headlessui/react'
-import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 
 
 type TaskCardProps = {
@@ -14,6 +19,21 @@ type TaskCardProps = {
 function TaskCard({ task }: TaskCardProps) {
 
   const navigate = useNavigate()
+  const params = useParams()
+  const projectId = params.projectId!
+
+  const queryClient = useQueryClient()
+
+  const { mutate } = useMutation({
+    mutationFn:DeleteTaskById,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['ProjectDetails', projectId] })
+      toast.success('Tarea eliminada correctamente')
+    },
+    onError: (error) => {
+      console.error('Error al eliminar la tarea:', error)
+    },
+  })
 
   return (
     <li className="bg-white shadow-md rounded-xl p-4 flex justify-between items-start gap-4">
@@ -67,6 +87,9 @@ function TaskCard({ task }: TaskCardProps) {
                   <button
                     className={`w-full text-left px-4 py-2 text-sm ${active ? 'bg-red-100 text-red-700' : 'text-red-500'
                       }`}
+                      onClick={() => {
+                        mutate({ projectId, taskId: task._id })
+                      }}
                   >
                     Eliminar Tarea
                   </button>

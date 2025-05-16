@@ -19,7 +19,7 @@ export default function TaskForm({ register }: TaskFormProps) {
           type='text'
           placeholder='Nombre de la tarea'
           className='w-full p-3  border-gray-300 border'
-          {...register('name', {  // Cambié 'taskName' a 'name'
+          {...register('name', {
             required: 'El nombre de la tarea es obligatorio',
           })}
         />
