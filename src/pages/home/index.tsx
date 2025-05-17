@@ -22,14 +22,12 @@ function Home() {
     mutationFn: DeleteProjectById,
     onSuccess: () => {
       toast.success('Proyecto eliminado correctamente')
-      console.info('Proyecto eliminado correctamente')
       queryClient.invalidateQueries({ queryKey: ['projects'] })
     },
     onError: () => {
       toast.error(`Error al eliminar el proyecto`)
     }
   })
-
 
   if (isLoading) return <IsLoading />
 

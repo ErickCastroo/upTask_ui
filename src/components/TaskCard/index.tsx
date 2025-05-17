@@ -41,7 +41,10 @@ function TaskCard({ task }: TaskCardProps) {
         <button className='text-lg font-semibold text-purple-600 text-left hover:underline'>
           {task.name}
         </button>
-        <p className='text-zinc-700 text-sm'>{task.description}</p>
+        <p className="text-xl font-light text-purple-500 mt-5 line-clamp-3">
+          {task.description}
+        </p>
+
       </div>
 
       <Menu as='div' className='relative'>

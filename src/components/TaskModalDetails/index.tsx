@@ -2,8 +2,10 @@ import { Fragment, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-import { GetTaskById } from '@/api/tasks'
 import { toast } from 'react-toastify'
+
+import { FormatDate } from '@/libs/date'
+import { GetTaskById } from '@/api/tasks'
 
 function TaskModalDetails() {
 
@@ -28,19 +30,11 @@ function TaskModalDetails() {
     }
   }, [isError, location.pathname, navigate, projectId])
 
-
-  if (!data) {
-    console.log('No hay datos de la tarea')
-  }
-  else {
-    console.log('Datos de la tarea:', data)
-  }
-
   const closeModal = () => {
     navigate(location.pathname, { replace: true })
   }
 
-  return (
+  if (data) return (
     <>
       <Transition appear show={Show} as={Fragment}>
         <Dialog as='div' className='relative z-10' onClose={() => closeModal()}>
@@ -68,16 +62,27 @@ function TaskModalDetails() {
                 leaveTo='opacity-0 scale-95'
               >
                 <Dialog.Panel className='w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-16'>
-                  <p className='text-sm text-slate-400'>Agregada el: </p>
-                  <p className='text-sm text-slate-400'>Última actualización: </p>
+                  <p className='text-sm text-slate-400'>Agregada el: {FormatDate(data.createdAt)} </p>
+                  <p className='text-sm text-slate-400'>Última actualización: {FormatDate(data.updatedAt)}</p>
                   <Dialog.Title
                     as='h3'
                     className='font-black text-4xl text-slate-600 my-5'
-                  >Titulo aquí
+                  >{data.name}
                   </Dialog.Title>
-                  <p className='text-lg text-slate-500 mb-2'>Descripción:</p>
+                  <p className='text-lg text-slate-500 mb-2'>{data.description}</p>
                   <div className='my-5 space-y-3'>
                     <label className='font-bold'>Estado Actual:</label>
+                    <select
+                      defaultValue={data.status}
+                      className='w-full p-3 border border-purple-300 hover:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500'
+                    >
+                      <option defaultChecked value='pending'>Pendiente</option>
+                      <option value='onHold'>En Espera</option>
+                      <option value='inProgress'>En Progreso</option>
+                      <option value='underReview'>En Revision</option>
+                      <option value='completed'>Completada</option>
+                    </select>
+
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
