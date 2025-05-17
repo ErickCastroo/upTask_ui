@@ -38,12 +38,12 @@ const statusStyle: { [key: string]: string } = {
 function TaskList({ tasks }: TaskListProps) {
   const groupedTasks = tasks.reduce((acc, task) => {
     acc[task.status] = [...(acc[task.status] || []), task]
-    return acc;
+    return acc
   }, { ...initialValue })
 
   return (
     <>
-      <h2 className="text-5xl font-black my-10">Tareas</h2>
+      <h2 className='text-5xl font-black my-10'>Tareas</h2>
 
       <div className='flex gap-5 overflow-x-scroll 2xl:overflow-auto pb-32'>
         {Object.entries(groupedTasks).map(([status, tasks]) => (
@@ -54,7 +54,7 @@ function TaskList({ tasks }: TaskListProps) {
             </h3>
             <ul className='mt-5 space-y-5'>
               {tasks.length === 0 ? (
-                <li className="text-purple-400 text-center pt-3">No Hay tareas</li>
+                <li className='text-purple-400 text-center pt-3'>No Hay tareas</li>
               ) : (
                 tasks.map(task => <TaskCard key={task._id} task={task} />)
               )}

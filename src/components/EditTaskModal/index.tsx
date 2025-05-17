@@ -24,7 +24,7 @@ const EditTaskModal = ({ data, taskId }: EditTaskModalProps) => {
     defaultValues: {
       name: data.name,
       description: data.description,
-      status: data.status || "onHold",
+      status: data.status || 'onHold',
 
   },
   })

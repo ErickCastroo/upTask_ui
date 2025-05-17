@@ -1,9 +1,9 @@
-import { useLocation, useParams } from "react-router-dom"
-import { useQuery } from "@tanstack/react-query"
+import { useLocation, useParams } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
 
-import { GetTaskById } from "@/api/tasks"
+import { GetTaskById } from '@/api/tasks'
 
-import { EditTaskModal } from "@/components/EditTaskModal"
+import { EditTaskModal } from '@/components/EditTaskModal'
 
 function EditData() {
   const params = useParams()
