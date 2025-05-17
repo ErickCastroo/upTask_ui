@@ -25,97 +25,96 @@ const EditTaskModal = ({ data, taskId }: EditTaskModalProps) => {
       name: data.name,
       description: data.description,
       status: data.status || 'onHold',
-
-  },
+    },
   })
 
-const queryClient = useQueryClient()
-const params = useParams()
-const projectId = params.projectId!
+  const queryClient = useQueryClient()
+  const params = useParams()
+  const projectId = params.projectId!
 
 
-const { mutate } = useMutation({
-  mutationFn: EditTask,
-  onSuccess: () => {
-    queryClient.invalidateQueries({ queryKey: ['ProjectDetails', projectId] })
-    reset()
-    toast.success('Tarea creada correctamente')
-    navigate(location.pathname, { replace: true })
-  },
-  onError: (error) => {
-    console.error('Error editing task:', error)
-  },
-})
+  const { mutate } = useMutation({
+    mutationFn: EditTask,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['ProjectDetails', projectId] })
+      reset()
+      toast.success('Tarea creada correctamente')
+      navigate(location.pathname, { replace: true })
+    },
+    onError: (error) => {
+      console.error('Error editing task:', error)
+    },
+  })
 
 
-const handleEditTask = async (formData: TaskFormTypes) => {
-  const data = {
-    projectId,
-    taskId,
-    formData,
+  const handleEditTask = async (formData: TaskFormTypes) => {
+    const data = {
+      projectId,
+      taskId,
+      formData,
+    }
+    mutate(data)
   }
-  mutate(data)
-}
 
-return (
-  <Transition appear show={true} as={Fragment}>
-    <Dialog as='div' className='relative z-10' onClose={() => navigate(location.pathname, { replace: true })}>
-      <TransitionChild
-        as={Fragment}
-        enter='ease-out duration-300'
-        enterFrom='opacity-0'
-        enterTo='opacity-100'
-        leave='ease-in duration-200'
-        leaveFrom='opacity-100'
-        leaveTo='opacity-0'
-      >
-        <div className='fixed inset-0 bg-black/60' />
-      </TransitionChild>
+  return (
+    <Transition appear show={true} as={Fragment}>
+      <Dialog as='div' className='relative z-10' onClose={() => navigate(location.pathname, { replace: true })}>
+        <TransitionChild
+          as={Fragment}
+          enter='ease-out duration-300'
+          enterFrom='opacity-0'
+          enterTo='opacity-100'
+          leave='ease-in duration-200'
+          leaveFrom='opacity-100'
+          leaveTo='opacity-0'
+        >
+          <div className='fixed inset-0 bg-black/60' />
+        </TransitionChild>
 
-      <div className='fixed inset-0 overflow-y-auto'>
-        <div className='flex min-h-full items-center justify-center p-4 text-center'>
-          <TransitionChild
-            as={Fragment}
-            enter='ease-out duration-300'
-            enterFrom='opacity-0 scale-95'
-            enterTo='opacity-100 scale-100'
-            leave='ease-in duration-200'
-            leaveFrom='opacity-100 scale-100'
-            leaveTo='opacity-0 scale-95'
-          >
-            <DialogPanel className='w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-16'>
-              <DialogTitle
-                as='h3'
-                className='font-black text-4xl  my-5'
-              >
-                Editar Tarea
-              </DialogTitle>
+        <div className='fixed inset-0 overflow-y-auto'>
+          <div className='flex min-h-full items-center justify-center p-4 text-center'>
+            <TransitionChild
+              as={Fragment}
+              enter='ease-out duration-300'
+              enterFrom='opacity-0 scale-95'
+              enterTo='opacity-100 scale-100'
+              leave='ease-in duration-200'
+              leaveFrom='opacity-100 scale-100'
+              leaveTo='opacity-0 scale-95'
+            >
+              <DialogPanel className='w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-16'>
+                <DialogTitle
+                  as='h3'
+                  className='font-black text-4xl  my-5'
+                >
+                  Editar Tarea
+                </DialogTitle>
 
-              <p className='text-xl font-bold'>Realiza cambios a una tarea en {''}
-                <span className='text-fuchsia-600'>este formulario</span>
-              </p>
+                <p className='text-xl font-bold'>Realiza cambios a una tarea en {''}
+                  <span className='text-fuchsia-600'>este formulario</span>
+                </p>
 
-              <form
-                className='mt-10 space-y-3'
-                onSubmit={handleSubmit(handleEditTask)}
-                noValidate
-              >
+                <form
+                  className='mt-10 space-y-3'
+                  onSubmit={handleSubmit(handleEditTask)}
+                  noValidate
+                >
 
-                <TaskForm register={register} errors={errors} />
+                  <TaskForm register={register} errors={errors} />
 
-                <input
-                  type='submit'
-                  className=' bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3  text-white font-black  text-xl cursor-pointer'
-                  value='Guardar Tarea'
-                />
-              </form>
-            </DialogPanel>
-          </TransitionChild>
+                  <input
+                    type='submit'
+                    className=' bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3  text-white font-black  text-xl cursor-pointer'
+                    value='Guardar Tarea'
+                  />
+                </form>
+              </DialogPanel>
+            </TransitionChild>
+          </div>
         </div>
-      </div>
-    </Dialog>
-  </Transition>
-)
+      </Dialog>
+    </Transition>
+  )
 }
 
 export { EditTaskModal }

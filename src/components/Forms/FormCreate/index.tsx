@@ -25,12 +25,10 @@ function ProjectForm({ register, errors }: ProjectFormProps) {
             required: 'El Titulo del Proyecto es obligatorio',
           })}
         />
-
         {errors.projectName && (
           <ErrorMessage>{errors.projectName.message}</ErrorMessage>
         )}
       </div>
-
       <div className='mb-5 space-y-3'>
         <label htmlFor='clientName' className='text-sm text-purple-900 uppercase font-bold'>
           Nombre Cliente
