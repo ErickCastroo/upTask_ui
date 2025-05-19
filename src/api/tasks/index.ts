@@ -3,9 +3,10 @@ import { Api } from '@/libs/axios'
 import { TaskFormTypes, Project, Task, TaskSchema } from '@/types'
 
 type TasksApi = {
-  formData: TaskFormTypes,
-  projectId: Project['_id'],
-  taskId: Task['_id'],
+  formData: TaskFormTypes
+  projectId: Project['_id']
+  taskId: Task['_id']
+  status: Task['status']
 }
 
 export async function CreateTask({ formData, projectId }: Pick<TasksApi, 'formData' | 'projectId'>) {
@@ -30,7 +31,6 @@ export async function CreateTask({ formData, projectId }: Pick<TasksApi, 'formDa
   }
 }
 
-
 export async function GetTaskById({ taskId, projectId }: Pick<TasksApi, 'projectId' | 'taskId'>) {
   try {
     const url = `/projects/${projectId}/tareas/${taskId}`
@@ -48,7 +48,7 @@ export async function GetTaskById({ taskId, projectId }: Pick<TasksApi, 'project
       throw new Error('La tarea recibida no tiene el formato esperado.')
     }
 
-    return result.data 
+    return result.data
 
   } catch (error) {
     if (isAxiosError(error)) {
@@ -61,7 +61,6 @@ export async function GetTaskById({ taskId, projectId }: Pick<TasksApi, 'project
     throw new Error('Error de conexión con el servidor')
   }
 }
-
 
 export async function EditTask({ projectId, taskId, formData }: Pick<TasksApi, 'projectId' | 'taskId' | 'formData'>) {
   try {
@@ -88,7 +87,24 @@ export async function DeleteTaskById({ taskId, projectId }: Pick<TasksApi, 'proj
     const { data } = await Api.delete<string>(url)
     return data
 
+  } catch (error) {
+    if (isAxiosError(error)) {
+      if (error.response) {
+        const serverMessage = error.response.data?.message ||
+          error.response.data?.error ||
+          JSON.stringify(error.response.data)
+        throw new Error(`Error del servidor (${error.response.status}): ${serverMessage}`)
+      }
+      throw new Error('Error de conexión con el servidor')
+    }
+  }
+}
 
+export async function UpdateStatus({ taskId, projectId, status }: Pick<TasksApi, 'projectId' | 'taskId' | 'status'>) {
+  try {
+    const url = `/projects/${projectId}/tareas/${taskId}/status`, statusData = { status }
+    const { data } = await Api.put<string>(url, statusData)
+    return data
   } catch (error) {
     if (isAxiosError(error)) {
       if (error.response) {
