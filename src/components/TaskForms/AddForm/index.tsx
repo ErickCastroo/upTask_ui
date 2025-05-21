@@ -39,23 +39,6 @@ export default function TaskForm({ register }: TaskFormProps) {
           })}
         />
       </div>
-
-      <div className='flex flex-col gap-5'>
-        <label
-          className='font-normal text-2xl text-purple-950'
-          htmlFor='status'
-        >Estado de la tarea</label>
-        <select
-          id='status'
-          className='w-full p-3 border border-purple-300 hover:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500'
-        >
-          <option defaultChecked value='pending'>Pendiente</option>
-          <option value='onHold'>En Espera</option>
-          <option value='inProgress'>En Progreso</option>
-          <option value='underReview'>En Revision</option>
-          <option value='completed'>Completada</option>
-        </select>
-      </div>
     </>
   )
 }
