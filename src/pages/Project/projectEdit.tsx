@@ -20,7 +20,7 @@ function ProjectEdit() {
     retry: false,
   })
 
-  const { register,  formState: { errors } } = useForm<ProjectFormTypes>()
+  const { register, formState: { errors } } = useForm<ProjectFormTypes>()
 
   useEffect(() => {
     if (isError) {

@@ -114,6 +114,7 @@ function FormEdit({ data, projectId, isLoading }: ProjectFormProps) {
           {...register('description')}
         />
       </div>
+    
       <input
           type='submit'
           className='bg-indigo-600 text-white px-4 py-2 rounded-lg mt-5 inline-block hover:bg-indigo-700 transition-colors font-semibold cursor-pointer'

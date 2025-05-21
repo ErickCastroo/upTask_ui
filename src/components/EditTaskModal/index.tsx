@@ -32,7 +32,6 @@ const EditTaskModal = ({ data, taskId }: EditTaskModalProps) => {
   const params = useParams()
   const projectId = params.projectId!
 
-
   const { mutate } = useMutation({
     mutationFn: EditTask,
     onSuccess: () => {
@@ -45,7 +44,6 @@ const EditTaskModal = ({ data, taskId }: EditTaskModalProps) => {
       console.error('Error editing task:', error)
     },
   })
-
 
   const handleEditTask = async (formData: TaskFormTypes) => {
     const data = {
@@ -70,7 +68,6 @@ const EditTaskModal = ({ data, taskId }: EditTaskModalProps) => {
         >
           <div className='fixed inset-0 bg-black/60' />
         </TransitionChild>
-
         <div className='fixed inset-0 overflow-y-auto'>
           <div className='flex min-h-full items-center justify-center p-4 text-center'>
             <TransitionChild
@@ -85,11 +82,10 @@ const EditTaskModal = ({ data, taskId }: EditTaskModalProps) => {
               <DialogPanel className='w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-16'>
                 <DialogTitle
                   as='h3'
-                  className='font-black text-4xl  my-5'
+                  className='font-black text-4xl my-5'
                 >
                   Editar Tarea
                 </DialogTitle>
-
                 <p className='text-xl font-bold'>Realiza cambios a una tarea en {''}
                   <span className='text-fuchsia-600'>este formulario</span>
                 </p>

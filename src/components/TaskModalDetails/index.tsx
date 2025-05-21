@@ -1,14 +1,17 @@
-import { Fragment, useEffect } from 'react'
+import { Fragment, useEffect, ChangeEvent } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 
+import { TaskStatus } from '@/types'
+
 import { FormatDate } from '@/libs/date'
-import { GetTaskById } from '@/api/tasks'
+import { GetTaskById, UpdateStatus } from '@/api/tasks'
 
 function TaskModalDetails() {
 
+  const queryClient = useQueryClient()
   const navigate = useNavigate()
   const params = useParams()
   const location = useLocation()
@@ -23,6 +26,26 @@ function TaskModalDetails() {
     enabled: !!taskId,
   })
 
+  const { mutate } = useMutation({
+    mutationFn: UpdateStatus,
+    onSuccess: () => {
+      toast.success('Estado actualizado correctamente', { toastId: 'success' })
+      queryClient.invalidateQueries({ queryKey: ['ProjectDetails', projectId] })
+      queryClient.invalidateQueries({ queryKey: ['Task', taskId] })
+      navigate(location.pathname, { replace: true })
+    },
+    onError: (error) => {
+      toast.error(error.message, { toastId: 'error' })
+    }
+  })
+  const handleChage = (e: ChangeEvent<HTMLSelectElement>) => {
+    const status = e.target.value as TaskStatus
+
+    const data = { status, projectId, taskId }
+    mutate(data)
+  }
+
+
   useEffect(() => {
     if (isError) {
       toast.error('Error al cargar la tarea', { toastId: 'error' })
@@ -33,6 +56,7 @@ function TaskModalDetails() {
   const closeModal = () => {
     navigate(location.pathname, { replace: true })
   }
+
 
   if (data) return (
     <>
@@ -74,6 +98,7 @@ function TaskModalDetails() {
                     <label className='font-bold'>Estado Actual:</label>
                     <select
                       defaultValue={data.status}
+                      onChange={handleChage}
                       className='w-full p-3 border border-purple-300 hover:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500'
                     >
                       <option defaultChecked value='pending'>Pendiente</option>
