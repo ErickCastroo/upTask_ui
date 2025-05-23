@@ -107,7 +107,6 @@ function TaskModalDetails() {
                       <option value='underReview'>En Revision</option>
                       <option value='completed'>Completada</option>
                     </select>
-
                   </div>
                 </Dialog.Panel>
               </Transition.Child>

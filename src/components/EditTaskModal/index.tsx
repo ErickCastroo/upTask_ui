@@ -82,7 +82,7 @@ const EditTaskModal = ({ data, taskId }: EditTaskModalProps) => {
               <DialogPanel className='w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-16'>
                 <DialogTitle
                   as='h3'
-                  className='font-black text-4xl my-5'
+                  className='font-black text-4xl mb-2'
                 >
                   Editar Tarea
                 </DialogTitle>
@@ -91,7 +91,7 @@ const EditTaskModal = ({ data, taskId }: EditTaskModalProps) => {
                 </p>
 
                 <form
-                  className='mt-10 space-y-3'
+                  className='mt-5 space-y-3'
                   onSubmit={handleSubmit(handleEditTask)}
                   noValidate
                 >
@@ -100,7 +100,7 @@ const EditTaskModal = ({ data, taskId }: EditTaskModalProps) => {
 
                   <input
                     type='submit'
-                    className=' bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3  text-white font-black  text-xl cursor-pointer'
+                    className=' bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-2 rounded-lg text-white font-black  text-xl cursor-pointer'
                     value='Guardar Tarea'
                   />
                 </form>
