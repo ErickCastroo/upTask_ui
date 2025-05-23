@@ -31,7 +31,7 @@ function ProjectCreate() {
   const onSubmit = async (data: ProjectFormTypes) => mutation.mutate(data)
 
   return (
-    <div className='max-w-3xl mx-auto'>
+    <div className='max-w-3xl mx-auto md:pl-0 pl-3'>
       <h1 className='text-5xl font-black'>Crear Proyecto</h1>
       <Link
         to='/'

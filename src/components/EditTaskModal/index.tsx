@@ -79,7 +79,7 @@ const EditTaskModal = ({ data, taskId }: EditTaskModalProps) => {
               leaveFrom='opacity-100 scale-100'
               leaveTo='opacity-0 scale-95'
             >
-              <DialogPanel className='w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-16'>
+              <DialogPanel className='w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-6 md:p-16'>
                 <DialogTitle
                   as='h3'
                   className='font-black text-4xl mb-2'
@@ -100,8 +100,7 @@ const EditTaskModal = ({ data, taskId }: EditTaskModalProps) => {
 
                   <input
                     type='submit'
-                    className=' bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-2 rounded-lg text-white font-black  text-xl cursor-pointer'
-                    value='Guardar Tarea'
+                    className='bg-indigo-600 text-white px-10 py-3 rounded-lg inline-block hover:bg-indigo-800 transition-colors font-semibold'
                   />
                 </form>
               </DialogPanel>

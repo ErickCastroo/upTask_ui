@@ -22,6 +22,7 @@ function NavMenu() {
         leaveTo='opacity-0 translate-y-1'
       >
         <Popover.Panel className='absolute left-1/2 z-10 mt-3 flex w-screen lg:max-w-min -translate-x-1/2 lg:-translate-x-48'>
+        
           <div className='w-full lg:w-56 shrink rounded-xl bg-white p-4 text-sm font-semibold leading-6 text-gray-900 shadow-lg ring-1 ring-gray-900/5'>
             <p className='text-center text-lg'>Usuario</p>
             <Link
@@ -30,7 +31,7 @@ function NavMenu() {
             >Mi Perfil</Link>
             <Link
               to='/'
-              className='block p-2 hover:text-purple-950 hover:bg-purple-100 rounded-lg'
+              className='p-2 hover:text-purple-950 hover:bg-purple-100 rounded-lg'
             >Mis Proyectos</Link>
             <button
               className='block p-2 mt-2 w-full hover:text-red-600 hover:border hover:border-red-400 cursor-pointer hover:bg-red-100 rounded-lg'

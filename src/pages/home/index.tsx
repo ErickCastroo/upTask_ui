@@ -11,7 +11,6 @@ import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import { IsLoading } from '@/components/isLoading'
 
 function Home() {
-
   const { data, isLoading } = useQuery({
     queryKey: ['projects'],
     queryFn: GetProject
@@ -32,7 +31,7 @@ function Home() {
   if (isLoading) return <IsLoading />
 
   return (
-    <div className='container mx-auto mt-10'>
+    <div className='container mx-auto mt-10 p-2 md:p-0'>
       <h1 className='text-5xl font-black'>Mis proyectos</h1>
       <p className='text-xl text-purple-500 font-black mt-5'>Administra tus proyectos</p>
       <Link

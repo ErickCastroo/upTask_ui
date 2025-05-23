@@ -28,7 +28,7 @@ function ProjectDetails() {
   }
 
   return (
-    <>
+    <div className='md:pl-0 pl-3'>
       <h1 className='text-5xl font-black'>{data.projectName}</h1>
       <p className='text-xl font-light text-purple-500 mt-5'>{data.description}</p>
       <nav className='my-5 flex gap-2'>
@@ -43,7 +43,7 @@ function ProjectDetails() {
       <AddTaskModal />
       <EditData /> 
       <TaskModalDetails />
-    </>
+    </div>
   )
 }
 
