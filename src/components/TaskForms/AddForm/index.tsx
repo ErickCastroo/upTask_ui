@@ -24,7 +24,6 @@ export default function TaskForm({ register }: TaskFormProps) {
           })}
         />
       </div>
-
       <div className='flex flex-col gap-2'>
         <label
           className='font-normal text-2xl text-purple-950'

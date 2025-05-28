@@ -6,6 +6,8 @@ import { ProjectCreate } from '@/pages/Project'
 import { ProjectEdit } from '@/pages/Project/projectEdit'
 import { ProjectDetails } from '@/pages/Project/projectDetails'
 import { Profile } from '@/pages/Profile'
+import { Login } from '@/pages/signIn'
+import { Register } from '@/pages/signUp'
 
 function Routers() {
   return (
@@ -18,6 +20,10 @@ function Routers() {
           <Route path='/project/:projectId/edit' element={<ProjectEdit />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='*' element={<h1 className='text-9xl text-purple-600'>404 Not Found</h1>} />
+        </Route>
+        <Route>
+          <Route path='/signIn' element={<Login />} index />
+          <Route path='/signUp' element={<Register />} />
         </Route>
       </Routes>
     </BrowserRouter>
