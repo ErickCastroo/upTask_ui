@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { z } from 'zod'
 
 //** Proyectos */
@@ -20,7 +21,22 @@ export const homeProjectSchema = z.array(
 export type Project = z.infer<typeof ProjectSchema>
 export type ProjectFormTypes = Pick<Project, 'projectName' | 'clientName' | 'description'>
 
+//auth
+const AuthSchema = z.object({
+  name: z.string(),
+  email: z.string().email(),
+  password: z.string(),
+  confirmPassword: z.string(),
+  token: z.string()
+})
 
+type Auth = z.infer<typeof AuthSchema>
+export type PuserLoginForm = Pick<Auth, 'email' | 'password'>
+export type PuserRegistrationForm = Pick<Auth, 'name' | 'email' | 'password' | 'confirmPassword'>
+
+
+//token
+export type confirmToken = Pick<Auth, 'token'>
 //Tasks
 export const TaskStatusSchema = z.enum(['pending', 'onHold', 'inProgress', 'underReview', 'completed'])
 export const TaskSchema = z.object({

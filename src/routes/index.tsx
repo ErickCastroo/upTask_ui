@@ -8,6 +8,7 @@ import { ProjectDetails } from '@/pages/Project/projectDetails'
 import { Profile } from '@/pages/Profile'
 import { Login } from '@/pages/signIn'
 import { Register } from '@/pages/signUp'
+import { TokenView } from '@/pages/TokenView'
 
 function Routers() {
   return (
@@ -24,6 +25,7 @@ function Routers() {
         <Route>
           <Route path='/signIn' element={<Login />} index />
           <Route path='/signUp' element={<Register />} />
+          <Route path='/token' element={<TokenView />} />
         </Route>
       </Routes>
     </BrowserRouter>
