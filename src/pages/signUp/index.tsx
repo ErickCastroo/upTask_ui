@@ -55,6 +55,7 @@ function Register() {
 
   const handleRegister = (formData: PuserRegistrationForm) => {
     mutate(formData)
+    localStorage.setItem('unverifiedEmail', formData.email)
     reset()
     navigate('/token')
   }
@@ -163,7 +164,6 @@ function Register() {
               Sign Up
             </button>
           </form>
-
         </div>
       </div>
     </div>
