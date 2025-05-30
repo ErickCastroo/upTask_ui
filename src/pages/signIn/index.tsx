@@ -1,23 +1,72 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import { useMutation } from '@tanstack/react-query'
 import { PuserLoginForm } from '@/types/index'
+import { LoginC } from '@/api/Auth/index'
+import { toast, ToastContainer } from 'react-toastify'
+
 
 const initialValues: PuserLoginForm = {
   email: '',
   password: '',
 }
 
-const handleLogin = (formData: PuserLoginForm) => {
-  console.log(formData)
-}
 
 function Login() {
+
+  const navigate = useNavigate()
+
+  const { mutate } = useMutation({
+    mutationFn: LoginC,
+    onSuccess: () => {
+      toast('Bienvenido', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      navigate('/')
+
+    },
+    onError: (error: Error) => {
+      toast(`${error.message}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    },
+  })
+
+  const handleLogin = (formData: PuserLoginForm) => {
+    mutate(formData)
+  }
+
   const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: initialValues })
 
   return (
     <div className="relative min-h-screen bg-cover bg-center bg-[url('./bgAuth.jpg')]">
       <div className='absolute inset-0 bg-black/80' />
-
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className='relative z-10 flex items-center justify-center min-h-screen'>
         <div className='bg-black/75 backdrop-blur-md w-4/5 xl:w-1/3 p-8 rounded-xs shadow-lg'>
           <h1 className='text-4xl font-bold text-center mb-4 text-white'>
@@ -28,6 +77,7 @@ function Login() {
             <Link to='/signUp' className='text-purple-500 hover:text-purple-700 ml-2'>
               Sign Up
             </Link>
+
           </p>
 
           <form className='space-y-4' onSubmit={handleSubmit(handleLogin)}>
@@ -70,6 +120,15 @@ function Login() {
               Sign In
             </button>
           </form>
+
+          <div className='flex justify-between text-purple-300 mt-16'>
+            <Link to='/password' className='text-purple-500 hover:text-purple-700 ml-2'>
+              ¿se te olvido la contraseña?
+            </Link>
+            <Link to='/token' className='text-purple-500 hover:text-purple-700 ml-2'>
+              Confirma tu cuenta aqui
+            </Link>
+          </div>
         </div>
       </div>
     </div>
