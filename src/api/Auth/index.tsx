@@ -2,7 +2,7 @@ import { isAxiosError } from 'axios'
 
 import { Api } from '@/libs/axios'
 
-import { confirmToken, PuserLoginForm, PuserRegistrationForm } from '@/types'
+import { confirmToken, PuserLoginForm, PuserRegistrationForm, ForgotPasswordForm } from '@/types'
 
 
 export async function RegisterC(formData: PuserRegistrationForm) {
@@ -59,6 +59,24 @@ export async function RequestNewToken(email: string) {
 export async function LoginC(formData: PuserLoginForm) {
   try {
     const { data } = await Api.post<string>('/auth/login', formData)
+    return data
+
+  } catch (error) {
+    if (isAxiosError(error)) {
+      if (error.response) {
+        throw new Error(error.response.data.message)
+      } else {
+        throw new Error('No se pudo conectar al servidor. Verifica tu conexión.')
+      }
+    }
+    throw new Error('Ocurrió un error inesperado.')
+  }
+}
+
+
+export async function ForgotPassword(formData: ForgotPasswordForm) {
+  try {
+    const { data } = await Api.post<string>('/auth/passwordRecovery', formData)
     return data
 
   } catch (error) {

@@ -1,61 +1,60 @@
-import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { useMutation } from '@tanstack/react-query'
-import { PuserLoginForm } from '@/types/index'
-import { LoginC } from '@/api/Auth/index'
+import { Link, useNavigate } from 'react-router-dom'
+import { ForgotPasswordForm } from '@/types'
 import { toast, ToastContainer } from 'react-toastify'
+import { useMutation } from '@tanstack/react-query'
 
+import { ForgotPassword } from '@/api/Auth/index'
 
-const initialValues: PuserLoginForm = {
-  email: '',
-  password: '',
-}
+export function ForgotPasswordView() {
+  const initialValues: ForgotPasswordForm = {
+    email: ''
+  }
 
-
-function Login() {
   const navigate = useNavigate()
 
+  const { register, handleSubmit,reset, formState: { errors } } = useForm({ defaultValues: initialValues })
+
   const { mutate } = useMutation({
-    mutationFn: LoginC,
+    mutationFn: ForgotPassword,
     onSuccess: () => {
-      toast('Bienvenido', {
-        position: "top-right",
+      toast('Correo enviado Correctamente', {
+        position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
-      });
-      navigate('/')
-
+        theme: 'dark',
+      })
+      reset()
+      navigate('/passwordRecoveryToken')
     },
     onError: (error: Error) => {
       toast(`${error.message}`, {
-        position: "top-right",
+        position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
-      });
+        theme: 'dark',
+      })
     },
   })
 
-  const handleLogin = (formData: PuserLoginForm) => {
+  const handleForgotPassword = (formData: ForgotPasswordForm) => {
     mutate(formData)
+    console.log('Formulario enviado:', formData)
   }
-
-  const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: initialValues })
 
   return (
     <div className="relative min-h-screen bg-cover bg-center bg-[url('./bgAuth.jpg')]">
       <div className='absolute inset-0 bg-black/80' />
       <ToastContainer
-        position="top-right"
+        position='top-right'
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -64,12 +63,12 @@ function Login() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="dark"
+        theme='dark'
       />
       <div className='relative z-10 flex items-center justify-center min-h-screen'>
         <div className='bg-black/75 backdrop-blur-md w-4/5 xl:w-1/3 p-8 rounded-xs shadow-lg'>
           <h1 className='text-4xl font-bold text-center mb-4 text-white'>
-            Sign In
+            Forgot Password
           </h1>
           <p className='text-purple-300 mb-1 md:flex md:justify-center'>
             Create your Account
@@ -79,7 +78,7 @@ function Login() {
 
           </p>
 
-          <form className='space-y-4' onSubmit={handleSubmit(handleLogin)}>
+          <form className='space-y-4' onSubmit={handleSubmit(handleForgotPassword)}>
             <div>
               <label
                 className={`block mb-2 ${errors.email ? 'text-red-400' : 'text-white'}`}
@@ -99,33 +98,20 @@ function Login() {
                 })}
               />
             </div>
-            <div>
-              <label className={`block mb-2 ${errors.password ? 'text-red-400' : 'text-white'}`} htmlFor='password'>Password</label>
-              <input
-                type='password'
-                id='password'
-                className='w-full py-2 border-b-1 border-purple-300 text-white focus:outline-none focus:ring-2 focus:ring-purple-500'
-                placeholder='Enter your password'
-                required
-                {...register('password', {
-                  required: 'El Password es obligatorio',
-                })}
-              />
-            </div>
             <button
               type='submit'
               className='md:w-1/3 w-full rounded-md bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 focus:outline-none focus:ring-2 focus:ring-purple-500 transition duration-200'
             >
-              Sign In
+              Send Reset Email
             </button>
           </form>
 
           <div className='flex justify-between text-purple-300 mt-16'>
-            <Link to='/passwordrecovery' className='text-purple-500 hover:text-purple-700 ml-2'>
-              Forgot Password?
+            <Link to='/signIn' className='text-purple-500 hover:text-purple-700 ml-2'>
+              Sign In here
             </Link>
-            <Link to='/token' className='text-purple-500 hover:text-purple-700 ml-2'>
-              Confirm Token
+            <Link to='/signUp' className='text-purple-500 hover:text-purple-700 ml-2'>
+              Sign Up here
             </Link>
           </div>
         </div>
@@ -133,5 +119,3 @@ function Login() {
     </div>
   )
 }
-
-export { Login }

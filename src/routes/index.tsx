@@ -9,6 +9,8 @@ import { Profile } from '@/pages/Profile'
 import { Login } from '@/pages/signIn'
 import { Register } from '@/pages/signUp'
 import { TokenView } from '@/pages/TokenView'
+import { PasswordRecoveryToken } from '@/components/RecoveryPToken'
+import { ForgotPasswordView } from '@/pages/passwordRecoverToken'
 
 function Routers() {
   return (
@@ -26,6 +28,8 @@ function Routers() {
           <Route path='/signIn' element={<Login />} index />
           <Route path='/signUp' element={<Register />} />
           <Route path='/token' element={<TokenView />} />
+          <Route path='/passwordRecoveryToken' element={<PasswordRecoveryToken />} />
+          <Route path='/passwordRecovery' element={<ForgotPasswordView />} />
         </Route>
       </Routes>
     </BrowserRouter>

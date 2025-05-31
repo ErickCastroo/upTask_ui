@@ -33,10 +33,12 @@ const AuthSchema = z.object({
 type Auth = z.infer<typeof AuthSchema>
 export type PuserLoginForm = Pick<Auth, 'email' | 'password'>
 export type PuserRegistrationForm = Pick<Auth, 'name' | 'email' | 'password' | 'confirmPassword'>
+export type ForgotPasswordForm = Pick<Auth, 'email'>
 
 
 //token
 export type confirmToken = Pick<Auth, 'token'>
+
 //Tasks
 export const TaskStatusSchema = z.enum(['pending', 'onHold', 'inProgress', 'underReview', 'completed'])
 export const TaskSchema = z.object({
