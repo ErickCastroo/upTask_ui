@@ -34,6 +34,8 @@ type Auth = z.infer<typeof AuthSchema>
 export type PuserLoginForm = Pick<Auth, 'email' | 'password'>
 export type PuserRegistrationForm = Pick<Auth, 'name' | 'email' | 'password' | 'confirmPassword'>
 export type ForgotPasswordForm = Pick<Auth, 'email'>
+export type PchangePassword = Pick<Auth, 'password' | 'confirmPassword'>
+
 
 
 //token

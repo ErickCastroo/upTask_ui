@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 import { toast, ToastContainer } from 'react-toastify'
 import { confirmToken } from '@/types'
 import { TokenConfirm, RequestNewToken } from '@/api/Auth'
 import { PinInput, PinInputField } from '@chakra-ui/pin-input'
+
+import { PasswordForm } from '../PasswordForm'
 
 const COOLDOWN_SECONDS = 120
 const COOLDOWN_KEY = 'resendCooldownExpires'
@@ -12,9 +13,8 @@ const COOLDOWN_KEY = 'resendCooldownExpires'
 function PasswordRecoveryToken() {
   const [token, setToken] = useState<confirmToken['token']>('')
   const [cooldown, setCooldown] = useState(0)
-  const navigate = useNavigate()
+  const [isTokenConfirmed, setIsTokenConfirmed] = useState(false)
 
-  // 🧠 Al montar, revisar si hay un cooldown activo en localStorage
   useEffect(() => {
     const expiresAt = localStorage.getItem(COOLDOWN_KEY)
     if (expiresAt) {
@@ -27,7 +27,7 @@ function PasswordRecoveryToken() {
     }
   }, [])
 
-  // 🕒 Disminuir el cooldown cada segundo
+  // 🕒 Disminuir el cooldown
   useEffect(() => {
     if (cooldown <= 0) return
     const interval = setInterval(() => {
@@ -46,7 +46,7 @@ function PasswordRecoveryToken() {
   const { mutate } = useMutation({
     mutationFn: TokenConfirm,
     onSuccess: () => {
-      navigate('/PasswordRecovery')
+      setIsTokenConfirmed(true)
       toast('token valido', { position: 'top-right', autoClose: 5000, theme: 'dark' })
     },
     onError: (error: Error) => {
@@ -98,46 +98,51 @@ function PasswordRecoveryToken() {
       <ToastContainer theme='dark' />
       <div className='absolute inset-0 bg-black/80' />
       <div className='relative z-10 flex items-center justify-center min-h-screen px-4'>
-        <div className='backdrop-blur-xl w-full max-w-xl p-8 sm:p-10 rounded-2xl shadow-2xl border border-white/10'>
-          <h1 className='text-4xl sm:text-5xl font-extrabold text-white text-center'>
-            Confirma tu Cuenta
-          </h1>
-          <p className='text-base sm:text-xl text-purple-200 text-center mt-6'>
-            Ingresa el código que recibiste
-            <span className='text-fuchsia-400 font-semibold'> por e-mail</span>
-          </p>
 
-          <form className='mt-10 space-y-6' onSubmit={(e) => e.preventDefault()}>
-            <label className='block text-white text-lg text-center'>Código de 6 dígitos</label>
-            <div className='flex justify-center'>
-              <div className='flex flex-wrap justify-center gap-2 sm:gap-3'>
-                <PinInput value={token} onChange={handleChange} onComplete={handleComplete}>
-                  {[...Array(6)].map((_, i) => (
-                    <PinInputField
-                      key={i}
-                      className='w-12 h-12 sm:w-14 sm:h-14 text-lg text-center rounded-xl border border-fuchsia-400 bg-white/10 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-fuchsia-400 transition-all'
-                    />
-                  ))}
-                </PinInput>
+        {isTokenConfirmed ? (
+          <PasswordForm />
+        ) : (
+          <div className='backdrop-blur-xl w-full max-w-xl p-8 sm:p-10 rounded-2xl shadow-2xl border border-white/10'>
+            <h1 className='text-4xl sm:text-5xl font-extrabold text-white text-center'>
+              Confirma tu Cuenta
+            </h1>
+            <p className='text-base sm:text-xl text-purple-200 text-center mt-6'>
+              Ingresa el código que recibiste
+              <span className='text-fuchsia-400 font-semibold'> por e-mail</span>
+            </p>
+
+            <form className='mt-10 space-y-6' onSubmit={(e) => e.preventDefault()}>
+              <label className='block text-white text-lg text-center'>Código de 6 dígitos</label>
+              <div className='flex justify-center'>
+                <div className='flex flex-wrap justify-center gap-2 sm:gap-3'>
+                  <PinInput value={token} onChange={handleChange} onComplete={handleComplete}>
+                    {[...Array(6)].map((_, i) => (
+                      <PinInputField
+                        key={i}
+                        className='w-12 h-12 sm:w-14 sm:h-14 text-lg text-center rounded-xl border border-fuchsia-400 bg-white/10 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-fuchsia-400 transition-all'
+                      />
+                    ))}
+                  </PinInput>
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
 
-          <nav className='mt-10 text-center'>
-            <button
-              onClick={handleRequestNewToken}
-              disabled={cooldown > 0}
-              className={`text-sm underline underline-offset-4 transition-colors ${cooldown > 0
-                ? 'text-gray-400 cursor-not-allowed'
-                : 'text-purple-200 hover:text-fuchsia-300'
-                }`}
-            >
-              {cooldown > 0
-                ? `Espera ${cooldown}s para solicitar otro código`
-                : '¿No recibiste el código? Solicitar nuevo'}
-            </button>
-          </nav>
-        </div>
+            <nav className='mt-10 text-center'>
+              <button
+                onClick={handleRequestNewToken}
+                disabled={cooldown > 0}
+                className={`text-sm underline underline-offset-4 transition-colors ${cooldown > 0
+                  ? 'text-gray-400 cursor-not-allowed'
+                  : 'text-purple-200 hover:text-fuchsia-300'
+                  }`}
+              >
+                {cooldown > 0
+                  ? `Espera ${cooldown}s para solicitar otro código`
+                  : '¿No recibiste el código? Solicitar nuevo'}
+              </button>
+            </nav>
+          </div>
+        )}
       </div>
     </div>
   )
