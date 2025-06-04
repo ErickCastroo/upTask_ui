@@ -2,7 +2,7 @@ import { isAxiosError } from 'axios'
 
 import { Api } from '@/libs/axios'
 
-import { confirmToken, PuserLoginForm, PuserRegistrationForm, ForgotPasswordForm } from '@/types'
+import { confirmToken, PuserLoginForm, PuserRegistrationForm, ForgotPasswordForm, UserSchema } from '@/types'
 
 
 export async function RegisterC(formData: PuserRegistrationForm) {
@@ -99,7 +99,12 @@ export async function ForgotPassword(formData: ForgotPasswordForm) {
 export async function UserGet() {
   try {
     const { data } = await Api.get('/auth/user')
-    return data
+    const response = UserSchema.safeParse(data)
+    if (!response.success) {
+      throw new Error('Datos de usuario no válidos')
+    }
+    return response.data
+
   } catch (error) {
     if (isAxiosError(error)) {
       if (error.response) {
@@ -109,7 +114,7 @@ export async function UserGet() {
       }
     }
     throw new Error('Ocurrió un error inesperado.')
-    
+
   }
-  
+
 }

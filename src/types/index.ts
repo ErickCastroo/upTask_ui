@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+ 
 import { z } from 'zod'
 
 //** Proyectos */
@@ -36,6 +36,15 @@ export type PuserRegistrationForm = Pick<Auth, 'name' | 'email' | 'password' | '
 export type ForgotPasswordForm = Pick<Auth, 'email'>
 export type PchangePassword = Pick<Auth, 'password' | 'confirmPassword'>
 
+
+//users
+export const UserSchema = AuthSchema.pick({
+  name: true,
+  email: true,
+}).extend({
+  _id: z.string(),
+})
+export type UserA = z.infer<typeof UserSchema>
 
 
 //token

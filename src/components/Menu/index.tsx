@@ -1,10 +1,25 @@
 import { Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { UserA } from '@/types'
 import { Popover, Transition } from '@headlessui/react'
 
 import { Bars3Icon } from '@heroicons/react/20/solid'
+import { useQueryClient } from '@tanstack/react-query'
 
-function NavMenu() {
+type NavMenuProps = {
+  name: UserA['name']
+}
+
+function NavMenu({ name }: NavMenuProps) {
+
+  const navigate = useNavigate()
+  const queryclient = useQueryClient()
+
+  const logout = () => {
+    localStorage.removeItem('tokenUptask')
+    queryclient.removeQueries({ queryKey: ['user'] })
+    navigate('/signIn')
+  }
 
   return (
     <Popover className='relative'>
@@ -22,21 +37,21 @@ function NavMenu() {
         leaveTo='opacity-0 translate-y-1'
       >
         <Popover.Panel className='absolute left-1/2 z-10 mt-3 flex w-screen lg:max-w-min -translate-x-1/2 lg:-translate-x-48'>
-        
+
           <div className='w-full lg:w-56 shrink rounded-xl bg-white p-4 text-sm font-semibold leading-6 text-gray-900 shadow-lg ring-1 ring-gray-900/5'>
-            <p className='text-center text-lg'>Usuario</p>
+            <p className='text-center text-lg'>{name}</p>
             <Link
               to='/profile'
               className='block p-2 mt-2 hover:text-purple-950 hover:bg-purple-100 rounded-lg'
             >Mi Perfil</Link>
             <Link
               to='/'
-              className='p-2 hover:text-purple-950 hover:bg-purple-100 rounded-lg'
+              className='block p-2 mt-2 hover:text-purple-950 hover:bg-purple-100 rounded-lg'
             >Mis Proyectos</Link>
             <button
               className='block p-2 mt-2 w-full hover:text-red-600 hover:border hover:border-red-400 cursor-pointer hover:bg-red-100 rounded-lg'
               type='button'
-              onClick={() => { }}
+              onClick={logout}
             >
               Cerrar Sesión
             </button>
