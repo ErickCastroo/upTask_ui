@@ -55,7 +55,6 @@ export async function RequestNewToken(email: string) {
   }
 }
 
-
 type LoginResponse = {
   token: string;
 }
@@ -95,4 +94,22 @@ export async function ForgotPassword(formData: ForgotPasswordForm) {
     }
     throw new Error('Ocurrió un error inesperado.')
   }
+}
+
+export async function UserGet() {
+  try {
+    const { data } = await Api.get('/auth/user')
+    return data
+  } catch (error) {
+    if (isAxiosError(error)) {
+      if (error.response) {
+        throw new Error(error.response.data.message)
+      } else {
+        throw new Error('No se pudo conectar al servidor. Verifica tu conexión.')
+      }
+    }
+    throw new Error('Ocurrió un error inesperado.')
+    
+  }
+  
 }
