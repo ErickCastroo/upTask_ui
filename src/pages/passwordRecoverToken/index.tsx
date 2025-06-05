@@ -47,7 +47,6 @@ export function ForgotPasswordView() {
 
   const handleForgotPassword = (formData: ForgotPasswordForm) => {
     mutate(formData)
-    console.log('Formulario enviado:', formData)
   }
 
   return (

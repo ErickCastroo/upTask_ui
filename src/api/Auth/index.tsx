@@ -63,7 +63,6 @@ export async function LoginC(formData: PuserLoginForm) {
   try {
     const { data } = await Api.post<LoginResponse>('/auth/login', formData)
     localStorage.setItem('tokenUptask', data.token)
-    console.log(data.token)
     return data
 
   } catch (error) {
