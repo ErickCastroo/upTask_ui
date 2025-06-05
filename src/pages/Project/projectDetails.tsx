@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { useQuery } from '@tanstack/react-query'
@@ -38,6 +38,9 @@ function ProjectDetails() {
         >
           Agregar Tarea
         </button>
+        <Link to={`/project/${projectId}/team`} className='bg-indigo-600 text-white px-10 py-3 rounded-lg inline-block hover:bg-indigo-800 transition-colors font-semibold'>
+          Ver Equipo
+        </Link>
       </nav>
       <TaskList tasks={data.tareas}/>
       <AddTaskModal />

@@ -1,4 +1,4 @@
- 
+
 import { z } from 'zod'
 
 //** Proyectos */
@@ -67,3 +67,13 @@ export const TaskSchema = z.object({
 export type Task = z.infer<typeof TaskSchema>
 export type TaskFormTypes = Pick<Task, 'name' | 'description' | 'status'>
 export type TaskStatus = z.infer<typeof TaskStatusSchema>
+
+// Teams
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const TeamMemberSchema = UserSchema.pick({
+  name: true,
+  email: true,
+  _id: true,
+})
+export type TeamMember = z.infer<typeof TeamMemberSchema>
+export type TeamMemberForm = Pick<TeamMember, 'email'>

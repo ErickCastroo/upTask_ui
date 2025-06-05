@@ -5,6 +5,8 @@ import { Layout } from '@/components/Layout'
 import { ProjectCreate } from '@/pages/Project'
 import { ProjectEdit } from '@/pages/Project/projectEdit'
 import { ProjectDetails } from '@/pages/Project/projectDetails'
+import { TeamProject } from '@/pages/Team/'
+
 import { Profile } from '@/pages/Profile'
 import { Login } from '@/pages/signIn'
 import { Register } from '@/pages/signUp'
@@ -21,6 +23,7 @@ function Routers() {
           <Route path='/project/new' element={<ProjectCreate />} />
           <Route path='/project/:projectId' element={<ProjectDetails />} />
           <Route path='/project/:projectId/edit' element={<ProjectEdit />} />
+          <Route path='/project/:projectId/team' element={<TeamProject />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='*' element={<h1 className='text-9xl text-purple-600'>404 Not Found</h1>} />
         </Route>
