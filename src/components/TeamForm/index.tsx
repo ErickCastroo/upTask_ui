@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { TeamMemberForm } from "@/types";
 import { findUserByEmail } from "@/api/Team";
+import { TeamSearch } from "../TeamSearch";
 
 export function AddMemberForm() {
   const initialValues: TeamMemberForm = {
@@ -28,7 +29,6 @@ export function AddMemberForm() {
 
   return (
     <>
-
       <form
         className="mt-10 space-y-5"
         onSubmit={handleSubmit(handleSearchUser)}
@@ -61,6 +61,23 @@ export function AddMemberForm() {
           value='Buscar Usuario'
         />
       </form>
+
+      {mutation.isPending && (
+        <div className="mt-5 text-center">
+          <p className="text-gray-500">Buscando usuario...</p>
+        </div>
+      )}
+      {mutation.isError && (
+        <div className="mt-5 text-center">
+          <p className="text-red-500">Usuario no encontrado</p>
+        </div>
+      )}
+
+      {
+        mutation.data && (
+          <TeamSearch user={mutation.data} />
+        )
+      }
     </>
   )
 }

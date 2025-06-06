@@ -7,7 +7,6 @@ import { Project, TeamMemberForm } from "@/types"
 export async function findUserByEmail({ projectId, formdata }: { projectId: Project['_id'], formdata: TeamMemberForm }) {
   try {
     const { data } = await Api.post(`/projects/${projectId}/team/find`, formdata)
-    console.log(data)
     return data
 
   } catch (error) {
