@@ -17,14 +17,13 @@ function TeamProject() {
           className='bg-indigo-600 text-white px-10 py-3 rounded-lg inline-block hover:bg-indigo-800 transition-colors font-semibold'
           onClick={() => navigate(location.pathname + '?addMember=true')}
         >
-          Agregar Tarea
+          Agregar Usuario
         </button>
         <Link to={`/project/${projectId}`} className='bg-indigo-600 text-white px-10 py-3 rounded-lg inline-block hover:bg-indigo-800 transition-colors font-semibold'>
           Volver
         </Link>
       </nav>
-
-      <AddMemberModal/>
+      <AddMemberModal />
     </>
   )
 }
