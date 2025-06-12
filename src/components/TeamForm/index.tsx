@@ -12,7 +12,7 @@ export function AddMemberForm() {
   const params = useParams()
   const projectId = params.projectId!
 
-  const { register, handleSubmit } = useForm({ defaultValues: initialValues })
+  const { register, handleSubmit, reset } = useForm({ defaultValues: initialValues })
 
   const mutation = useMutation({
     mutationFn: findUserByEmail,
@@ -25,6 +25,11 @@ export function AddMemberForm() {
     }
     mutation.mutate(data)
 
+  }
+
+  const resetdata = () => {
+    reset()
+    mutation.reset()
   }
 
   return (
@@ -75,7 +80,7 @@ export function AddMemberForm() {
 
       {
         mutation.data && (
-          <TeamSearch user={mutation.data} />
+          <TeamSearch user={mutation.data} resetdata={resetdata} />
         )
       }
     </>
