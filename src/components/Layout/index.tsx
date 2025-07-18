@@ -35,7 +35,7 @@ function Layout() {
     <>
       <header className='bg-indigo-800 p-1'>
         <div className='max-w-screen-2xl mx-auto flex flex-col lg:flex-row justify-between items-center'>
-          <div className='w-64'>
+          <div className='w-72'>
             <Link to='/' className='flex items-center'>
               <Logo />
             </Link>

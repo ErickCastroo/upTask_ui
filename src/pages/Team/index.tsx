@@ -1,6 +1,6 @@
 import AddMemberModal from '@/components/admemberModal'
 import { Link } from 'react-router-dom'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { GetMembers, removeUserMember } from '@/api/Team'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Menu, Transition } from '@headlessui/react'
@@ -9,6 +9,7 @@ import { Fragment } from 'react/jsx-runtime'
 import { toast, ToastContainer } from 'react-toastify'
 
 function TeamProject() {
+  const queryClient = useQueryClient()
   const navigate = useNavigate()
   const params = useParams()
   const projectId = params.projectId!
@@ -30,7 +31,9 @@ function TeamProject() {
         draggable: true,
         progress: undefined,
       })
+      queryClient.invalidateQueries({ queryKey: ['projectTeam', projectId] })
     },
+
     onError: () => {
       toast.error(`Error al eliminar el usuario del equipo`, {
         position: 'top-right',

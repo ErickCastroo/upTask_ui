@@ -3,6 +3,8 @@ import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
+import { useAuth } from '@/hook/useAuth'
+
 import { DeleteProjectById, GetProject } from '@/api/project'
 
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
@@ -11,6 +13,7 @@ import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import { IsLoading } from '@/components/isLoading'
 
 function Home() {
+  const { data: user, isLoading: isLoadingUser } = useAuth()
   const { data, isLoading } = useQuery({
     queryKey: ['projects'],
     queryFn: GetProject
@@ -28,7 +31,7 @@ function Home() {
     }
   })
 
-  if (isLoading) return <IsLoading />
+  if (isLoading && isLoadingUser) return <IsLoading />
 
   return (
     <div className='container mx-auto mt-10 p-2 md:p-0'>
@@ -40,7 +43,7 @@ function Home() {
       >
         Crear Proyecto
       </Link>
-      {data?.length === 0 ? (
+      {user && data && data.length === 0 ? (
 
         <footer className='absolute bottom-0 left-0 right-0 flex items-center justify-center h-96'>
           <p className='text-center justify-center text-gray-600'>
@@ -78,7 +81,7 @@ function Home() {
                   <Menu as='div' className='relative flex-none '>
                     <MenuButton className='-m-2.5 block p-2.5 text-gray-500 hover:text-purple-800'>
                       <span className='sr-only'>opciones</span>
-                      <EllipsisVerticalIcon className='h-9 w-9 hover:text-purple-800' aria-hidden='true'/>
+                      <EllipsisVerticalIcon className='h-9 w-9 hover:text-purple-800' aria-hidden='true' />
                     </MenuButton>
                     <Transition
                       as={Fragment}
@@ -98,23 +101,30 @@ function Home() {
                             Ver Proyecto
                           </Link>
                         </MenuItem>
-                        <MenuItem>
-                          <Link
-                            to={`/project/${project._id}/edit`}
-                            className='block p-2 mt-2 hover:text-purple-950 hover:bg-purple-100 rounded-lg'
-                          >
-                            Editar Proyecto
-                          </Link>
-                        </MenuItem>
-                        <MenuItem>
-                          <button
-                            type='button'
-                            className='block p-2 mt-2 w-full hover:text-red-600  hover:border hover:border-red-400 cursor-pointer hover:bg-red-100 rounded-lg'
-                            onClick={() => { mutate(project._id) }}
-                          >
-                            Eliminar Proyecto
-                          </button>
-                        </MenuItem>
+                        {
+                          project.manager === user?._id && (
+                            <>
+                              <MenuItem>
+                                <Link
+                                  to={`/project/${project._id}/edit`}
+                                  className='block p-2 mt-2 hover:text-purple-950 hover:bg-purple-100 rounded-lg'
+                                >
+                                  Editar Proyecto
+                                </Link>
+                              </MenuItem>
+
+                              <MenuItem>
+                                <button
+                                  type='button'
+                                  className='block p-2 mt-2 w-full hover:text-red-600  hover:border hover:border-red-400 cursor-pointer hover:bg-red-100 rounded-lg'
+                                  onClick={() => { mutate(project._id) }}
+                                >
+                                  Eliminar Proyecto
+                                </button>
+                              </MenuItem>
+                            </>
+                          )
+                        }
                       </MenuItems>
                     </Transition>
                   </Menu>

@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { TeamMember } from '@/types'
 import { addUserMember } from '@/api/Team'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -14,10 +14,11 @@ type TeamSearchProps = {
 function TeamSearch({ user, resetdata }: TeamSearchProps) {
 
   const params = useParams()
+  const queryClient = useQueryClient()
   const navigate = useNavigate()
   const projectId = params.projectId!
-  
-  
+
+
   const { mutate } = useMutation({
     mutationFn: addUserMember,
     onSuccess: () => {
@@ -32,6 +33,7 @@ function TeamSearch({ user, resetdata }: TeamSearchProps) {
         theme: "dark",
       });
       navigate(location.pathname, { replace: true })
+      queryClient.invalidateQueries({ queryKey: ['projectTeam', projectId] })
       resetdata()
     },
     onError: (error: Error) => {
@@ -48,7 +50,7 @@ function TeamSearch({ user, resetdata }: TeamSearchProps) {
       console.error('Error adding user:', error)
     },
   })
-  
+
   const handleAddUser = () => {
     const data = {
       projectId,
@@ -58,7 +60,7 @@ function TeamSearch({ user, resetdata }: TeamSearchProps) {
   }
   return (
     <>
-    <ToastContainer
+      <ToastContainer
         position="top-right"
         autoClose={5000}
         hideProgressBar={false}

@@ -122,7 +122,6 @@ function Register() {
                   },
                 })}
               />
-
             </div>
             <div>
               <label className={`block mb-2 ${errors.password ? 'text-red-400' : 'text-white'}`}
