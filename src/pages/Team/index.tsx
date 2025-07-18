@@ -1,12 +1,18 @@
-import AddMemberModal from '@/components/admemberModal'
-import { Link } from 'react-router-dom'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { GetMembers, removeUserMember } from '@/api/Team'
-import { useNavigate, useParams } from 'react-router-dom'
-import { Menu, Transition } from '@headlessui/react'
-import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import { Fragment } from 'react/jsx-runtime'
 import { toast, ToastContainer } from 'react-toastify'
+import { useNavigate, useParams, Link } from 'react-router-dom'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+
+
+import { useIsProjectManager } from '@/hook/useManager'
+import { GetMembers, removeUserMember } from '@/api/Team'
+
+import { Menu, Transition } from '@headlessui/react'
+import AddMemberModal from '@/components/admemberModal'
+
+import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
+
+
 
 function TeamProject() {
   const queryClient = useQueryClient()
@@ -18,6 +24,7 @@ function TeamProject() {
     queryFn: () => GetMembers(projectId),
     retry: false,
   })
+  const isManager = useIsProjectManager(projectId)
 
   const { mutate } = useMutation({
     mutationFn: removeUserMember,
@@ -56,12 +63,15 @@ function TeamProject() {
       <h1 className='text-5xl font-black'> Administrar Equipo</h1>
       <p className='text-2xl font-light mt-5'>Aministrar el equipo de trabajo</p>
       <nav className='my-5 flex gap-2'>
-        <button
-          className='bg-indigo-600 text-white px-10 py-3 rounded-lg inline-block hover:bg-indigo-800 transition-colors font-semibold'
-          onClick={() => navigate(location.pathname + '?addMember=true')}
-        >
-          Agregar Usuario
-        </button>
+
+        {isManager && (
+          <button
+            className='bg-indigo-600 text-white px-10 py-3 rounded-lg inline-block hover:bg-indigo-800 transition-colors font-semibold'
+            onClick={() => navigate(location.pathname + '?addMember=true')}
+          >
+            Agregar Usuario
+          </button>
+        )}
         <Link to={`/project/${projectId}`} className='bg-indigo-600 text-white px-10 py-3 rounded-lg inline-block hover:bg-indigo-800 transition-colors font-semibold'>
           Volver
         </Link>

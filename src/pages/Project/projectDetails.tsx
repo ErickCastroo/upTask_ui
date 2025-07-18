@@ -2,6 +2,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { useQuery } from '@tanstack/react-query'
+
 import { GetProjectById } from '@/api/project'
 
 import { IsLoading } from '@/components/isLoading'
@@ -21,13 +22,13 @@ function ProjectDetails() {
     retry: false,
   })
 
-  if (isLoading) return <IsLoading />
+  if (isLoading ) return <IsLoading />
   if (isError) {
     toast.error('Error al cargar el proyecto')
     usenavigate('/')
   }
 
-  return (
+  if (data) return (
     <div className='md:pl-0 pl-3'>
       <h1 className='text-5xl font-black'>{data.projectName}</h1>
       <p className='text-xl font-light text-purple-500 mt-5'>{data.description}</p>
@@ -42,9 +43,9 @@ function ProjectDetails() {
           Ver Equipo
         </Link>
       </nav>
-      <TaskList tasks={data.tareas}/>
+      <TaskList tasks={data.tareas} />
       <AddTaskModal />
-      <EditData /> 
+      <EditData />
       <TaskModalDetails />
     </div>
   )

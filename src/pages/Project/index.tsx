@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 
 import { useMutation } from '@tanstack/react-query'
 
+
 import { CreateProject } from '@/api/project'
 import { initialValues } from '@/libs/initialValues'
 
@@ -14,7 +15,7 @@ import { ProjectForm } from '@/components/Forms/FormCreate'
 function ProjectCreate() {
   const navigate = useNavigate()
 
-  const { register, handleSubmit, formState: { errors } } = useForm({defaultValues: initialValues})
+  const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: initialValues })
 
   const mutation = useMutation({
     mutationFn: CreateProject,

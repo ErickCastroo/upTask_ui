@@ -63,6 +63,17 @@ function Home() {
               >
                 <div className='flex min-w-0 gap-x-4'>
                   <div className='min-w-0 flex-auto space-y-2'>
+                    {
+                      project.manager === user?._id ? (
+                        <p className='text-sm text-purple-400 border-2 border-purple-300 rounded-lg px-5 py-1 font-black'>
+                          Administrador
+                        </p>
+                      ) : (
+                        <p className='text-sm text-purple-400 border-2 border-purple-300 rounded-lg px-5 py-1 font-black'>
+                          Colaborador
+                        </p>
+                      )
+                    }
                     <Link
                       to={`/project/${project._id}`}
                       className='text-gray-400 hover:text-purple-500 cursor-pointer hover:underline text-3xl font-bold'
