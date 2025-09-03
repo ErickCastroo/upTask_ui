@@ -35,7 +35,7 @@ export async function GetTaskById({ taskId, projectId }: Pick<TasksApi, 'project
   try {
     const url = `/projects/${projectId}/tareas/${taskId}`
     const { data: rawData } = await Api(url)
-
+    console.log('✅ Tarea recibida del servidor:', rawData)
     const transformed = {
       ...rawData,
       projectId: rawData.project

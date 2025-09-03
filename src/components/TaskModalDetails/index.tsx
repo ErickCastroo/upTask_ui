@@ -85,15 +85,23 @@ function TaskModalDetails() {
                 leaveFrom='opacity-100 scale-100'
                 leaveTo='opacity-0 scale-95'
               >
-                <Dialog.Panel className='w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-16'>
-                  <p className='text-sm text-slate-400'>Agregada el: {FormatDate(data.createdAt)} </p>
-                  <p className='text-sm text-slate-400'>Última actualización: {FormatDate(data.updatedAt)}</p>
+                <Dialog.Panel className='w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-10'>
+                  <div className='flex justify-between'>
+                    <div>
+                      <p className='text-sm text-purple-950'>Fecha de inicio: <span className='text-purple-600'>{FormatDate(data.createdAt)}</span> </p>
+
+                      <p className='text-sm text-purple-950'>Última actualización: <span className='text-purple-600'>{FormatDate(data.updatedAt)}</span></p>
+                    </div>
+                    <p className='text-sm text-purple-950'>Estado actualizado por: <span className='text-purple-600'>{data.completedBy?.name || 'Nadie'}</span></p>
+                  </div>
                   <Dialog.Title
                     as='h3'
-                    className='font-black text-4xl text-slate-600 my-5'
+                    className='font-black text-4xl text-purple-600 my-5'
                   >{data.name}
                   </Dialog.Title>
-                  <p className='text-lg text-slate-500 mb-2'>{data.description}</p>
+                  <p className='text-lg text-purple-950 mb-2'>{data.description}</p>
+
+
                   <div className='my-5 space-y-3'>
                     <label className='font-bold'>Estado Actual:</label>
                     <select
