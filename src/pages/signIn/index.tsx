@@ -19,29 +19,29 @@ function Login() {
     mutationFn: LoginC,
     onSuccess: () => {
       toast('Bienvenido', {
-        position: "top-right",
+        position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
-      });
+        theme: 'dark',
+      })
       navigate('/')
 
     },
     onError: (error: Error) => {
       toast(`${error.message}`, {
-        position: "top-right",
+        position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
-      });
+        theme: 'dark',
+      })
     },
   })
 
@@ -55,7 +55,7 @@ function Login() {
     <div className="relative min-h-screen bg-cover bg-center bg-[url('./bgAuth.jpg')]">
       <div className='absolute inset-0 bg-black/80' />
       <ToastContainer
-        position="top-right"
+        position='top-right'
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -64,7 +64,7 @@ function Login() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="dark"
+        theme='dark'
       />
       <div className='relative z-10 flex items-center justify-center min-h-screen'>
         <div className='bg-black/75 backdrop-blur-md w-4/5 xl:w-1/3 p-8 rounded-xs shadow-lg'>

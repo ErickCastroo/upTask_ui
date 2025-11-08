@@ -1,15 +1,15 @@
-import { Fragment } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { AddMemberForm } from '../TeamForm';
+import { Fragment } from 'react'
+import { Dialog, Transition } from '@headlessui/react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { AddMemberForm } from '../TeamForm'
 
 export default function AddMemberModal() {
 
     const location = useLocation()
     const navigate = useNavigate()
 
-    const queryParams = new URLSearchParams(location.search);
-    const addMember = queryParams.get('addMember');
+    const queryParams = new URLSearchParams(location.search)
+    const addMember = queryParams.get('addMember')
     const show = addMember ? true : false
 
     return (

@@ -1,9 +1,9 @@
-import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
-import { TeamMemberForm } from '@/types';
-import { findUserByEmail } from '@/api/Team';
-import { TeamSearch } from '../TeamSearch';
+import { useForm } from 'react-hook-form'
+import { useParams } from 'react-router-dom'
+import { useMutation } from '@tanstack/react-query'
+import { TeamMemberForm } from '@/types'
+import { findUserByEmail } from '@/api/Team'
+import { TeamSearch } from '../TeamSearch'
 
 export function AddMemberForm() {
   const initialValues: TeamMemberForm = {

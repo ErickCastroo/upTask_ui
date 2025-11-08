@@ -56,7 +56,7 @@ export async function RequestNewToken(email: string) {
 }
 
 type LoginResponse = {
-  token: string;
+  token: string
 }
 
 export async function LoginC(formData: PuserLoginForm) {

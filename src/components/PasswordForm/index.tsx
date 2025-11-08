@@ -27,7 +27,7 @@ function PasswordForm() {
         draggable: true,
         progress: undefined,
         theme: 'dark',
-      });
+      })
 
     },
     onError: (error: Error) => {
@@ -40,7 +40,7 @@ function PasswordForm() {
         draggable: true,
         progress: undefined,
         theme: 'dark',
-      });
+      })
     },
   })
 

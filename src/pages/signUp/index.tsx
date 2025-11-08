@@ -21,28 +21,28 @@ function Register() {
     mutationFn: RegisterC,
     onSuccess: () => {
       toast('Verifique su correo', {
-        position: "top-right",
+        position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
-      });
+        theme: 'dark',
+      })
 
     },
     onError: (error: Error) => {
       toast(`${error.message}`, {
-        position: "top-right",
+        position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
-      });
+        theme: 'dark',
+      })
     },
   })
 
@@ -62,7 +62,7 @@ function Register() {
   return (
     <div className="relative min-h-screen bg-cover bg-center bg-[url('./bgAuth.jpg')]">
       <ToastContainer
-        position="top-right"
+        position='top-right'
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -71,7 +71,7 @@ function Register() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="dark"
+        theme='dark'
       />
 
       <div className='absolute inset-0 bg-black/80' />

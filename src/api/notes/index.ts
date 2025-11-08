@@ -16,7 +16,7 @@ export async function addNote({ formdata, projectId, taskId }: Pick<NoteApiType,
     return data
   } catch (error) {
     if (isAxiosError(error) && error.response) {
-      throw new Error(`Error del servidor (${error.response.status}): ${error.response.data?.message || JSON.stringify(error.response.data)}`);
+      throw new Error(`Error del servidor (${error.response.status}): ${error.response.data?.message || JSON.stringify(error.response.data)}`)
     }
     throw error
   }

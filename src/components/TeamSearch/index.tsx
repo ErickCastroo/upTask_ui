@@ -9,7 +9,7 @@ import { ToastContainer, toast } from 'react-toastify'
 type TeamSearchProps = {
   user: TeamMember
   resetdata: () => void
-};
+}
 
 function TeamSearch({ user, resetdata }: TeamSearchProps) {
 
@@ -23,30 +23,30 @@ function TeamSearch({ user, resetdata }: TeamSearchProps) {
     mutationFn: addUserMember,
     onSuccess: () => {
       toast('Usuario Inivtado', {
-        position: "top-right",
+        position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
-      });
+        theme: 'dark',
+      })
       navigate(location.pathname, { replace: true })
       queryClient.invalidateQueries({ queryKey: ['projectTeam', projectId] })
       resetdata()
     },
     onError: (error: Error) => {
       toast(`${error.message}`, {
-        position: "top-right",
+        position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
-      });
+        theme: 'dark',
+      })
       console.error('Error adding user:', error)
     },
   })
@@ -61,7 +61,7 @@ function TeamSearch({ user, resetdata }: TeamSearchProps) {
   return (
     <>
       <ToastContainer
-        position="top-right"
+        position='top-right'
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -70,7 +70,7 @@ function TeamSearch({ user, resetdata }: TeamSearchProps) {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="dark"
+        theme='dark'
       />
       <div className='mt-5 backdrop-blur-sm bg-white/70 border border-white/30 shadow-xl rounded-2xl p-6 text-center space-y-5'>
         <h2 className='text-2xl font-bold text-gray-800'>
