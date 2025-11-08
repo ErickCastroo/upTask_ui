@@ -9,6 +9,8 @@ import { TaskStatus } from '@/types'
 import { FormatDate } from '@/libs/date'
 import { GetTaskById, UpdateStatus } from '@/api/tasks'
 
+import { NotesPanel } from '@/components/Notes'
+
 function TaskModalDetails() {
 
   const queryClient = useQueryClient()
@@ -101,9 +103,28 @@ function TaskModalDetails() {
                   </Dialog.Title>
                   <p className='text-lg text-purple-950 mb-2'>{data.description}</p>
 
+                  {Array.isArray(data.completedBy) && data.completedBy.length > 0 ? (
+                    <>
+                      <p className='text-2xl text-purple-500 mb-2'>Historial de cambios</p>
+                      <ul className='list-decimal ml-5'>
+                        {data.completedBy.map((log) => (
+                          <li key={log._id} className='mb-1 text-purple-900'>
+                            <span className='font-bold text-purple-600'>{log.name}</span>{' '}
+                            cambió el estado a{' '}
+                            <span className='font-bold text-purple-600'>{log.status}</span>{' '}
+                            el {FormatDate(log.date)}
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  ) : (
+                    <p className='text-gray-400 italic'>Aún no hay historial de cambios.</p>
+                  )}
+
+
 
                   <div className='my-5 space-y-3'>
-                    <label className='font-bold'>Estado Actual:</label>
+                    <label className='font- text-purple-950'>Estado Actual:</label>
                     <select
                       defaultValue={data.status}
                       onChange={handleChage}
@@ -116,6 +137,7 @@ function TaskModalDetails() {
                       <option value='completed'>Completada</option>
                     </select>
                   </div>
+                  <NotesPanel />
                 </Dialog.Panel>
               </Transition.Child>
             </div>

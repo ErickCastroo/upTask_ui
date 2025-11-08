@@ -54,6 +54,19 @@ export type PchangePassword = Pick<Auth, 'password' | 'confirmPassword'>
 //token
 export type confirmToken = Pick<Auth, 'token'>
 
+
+//Notes
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const noteSchema = z.object({
+  _id: z.string(),
+  content: z.string(),
+  CreateBy: UserSchema,
+  task: z.string(),
+})
+
+export type Note = z.infer<typeof noteSchema>
+export type NoteFormData = Pick<Note, 'content' >
+
 //Tasks
 export const TaskStatusSchema = z.enum(['pending', 'onHold', 'inProgress', 'underReview', 'completed'])
 export const TaskSchema = z.object({

@@ -19,27 +19,27 @@ function PasswordForm() {
     mutationFn: ForgotPassword,
     onSuccess: () => {
       toast('Verifique su correo', {
-        position: "top-right",
+        position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: 'dark',
       });
 
     },
     onError: (error: Error) => {
       toast(`${error.message}`, {
-        position: "top-right",
+        position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: 'dark',
       });
     },
   })
@@ -58,7 +58,7 @@ function PasswordForm() {
   return (
     <>
       <ToastContainer
-        position="top-right"
+        position='top-right'
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -67,7 +67,7 @@ function PasswordForm() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="dark"
+        theme='dark'
       />
 
       <div className='bg-black/75 backdrop-blur-md w-1/2 xl:w-1/3 p-8 rounded-xs shadow-lg'>
@@ -85,7 +85,7 @@ function PasswordForm() {
             <label className={`block mb-2 ${errors.password ? 'text-red-400' : 'text-white'}`}
               htmlFor='password'>Password</label>
             <input
-              type="password"
+              type='password'
               id='password'
               className='w-full py-2 border-b-1 border-purple-300 text-white focus:outline-none focus:ring-2 focus:ring-purple-500'
               placeholder='Enter your password'
